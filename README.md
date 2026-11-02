@@ -5,7 +5,7 @@ El cliente elige recursos, suma unidades al carrito y envía el pedido por Whats
 
 ## Stack
 
-Mismo stack que Cofi Lab:
+
 
 - **Next.js 16** (App Router, JavaScript) + React 19
 - **Tailwind CSS 3**
