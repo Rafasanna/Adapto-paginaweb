@@ -27,18 +27,32 @@ export function Footer() {
           <p className="mt-5 max-w-[19rem] text-[15px] leading-relaxed text-gris">
             Recursos terapéuticos listos para imprimir, creados por Azu y Jaz, Licenciadas en Terapia Ocupacional.
           </p>
-          <div className="mt-5 flex flex-wrap gap-2">
-            <a href={whatsappUrl(site.contact.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="btn-whatsapp min-h-[42px] px-4 text-[14px]">
-              <WhatsAppIcon className="h-4 w-4" />
-              WhatsApp
-            </a>
-            {site.contact.instagram.url ? (
-              <a href={site.contact.instagram.url} target="_blank" rel="noopener noreferrer" className="btn-outline min-h-[42px] px-4 text-[14px]">
-                <InstagramIcon className="h-4 w-4" />
-                {site.contact.instagram.handle}
-              </a>
-            ) : null}
-          </div>
+          <a
+            href={whatsappUrl(site.contact.whatsappMessage)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-whatsapp mt-5 min-h-[42px] px-4 text-[14px]"
+          >
+            <WhatsAppIcon className="h-4 w-4" />
+            WhatsApp
+          </a>
+          {site.contact.instagrams.length ? (
+            <ul className="mt-4 space-y-1.5" aria-label="Instagram">
+              {site.contact.instagrams.map((item) => (
+                <li key={item.handle}>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 py-0.5 text-[15px] text-tinta/80 transition-colors hover:text-teal-ink"
+                  >
+                    <InstagramIcon className="h-[18px] w-[18px] text-teal-ink" />
+                    <span className="link-underline">{item.handle}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </div>
 
         <nav aria-label="Pie de página" className="col-span-2 sm:col-span-1">

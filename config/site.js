@@ -37,8 +37,11 @@ export const site = {
     // Mensaje que se precarga al tocar el botón fijo de WhatsApp (y los "Escribinos")
     whatsappMessage: "Hola, ADAPTO. Vi la página y quería hacerles una consulta.",
     email: "",
-    // Vacío = no se muestra
-    instagram: { handle: "", url: "" }
+    // Instagram profesionales de Azu y Jaz (se muestran al final del footer)
+    instagrams: [
+      { handle: "@lic.mazulsanna", url: "https://www.instagram.com/lic.mazulsanna/" },
+      { handle: "@lic.jazminrodriguez", url: "https://www.instagram.com/lic.jazminrodriguez/" }
+    ]
   },
 
   nav: [
