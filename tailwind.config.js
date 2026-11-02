@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 
 // Paleta tomada del logo de ADAPTO (PDF de marca).
+// Color principal de la interfaz: el verde agua de la "T" y la "O" (teal).
+// Los otros cuatro quedan para el logo y los íconos de cada tema.
 // Cada color tiene: DEFAULT (relleno de la letra), dark (el borde de la letra),
 // soft (fondo suave) e ink (texto legible sobre ese color).
 const palette = {
@@ -8,7 +10,7 @@ const palette = {
   pink: { DEFAULT: "#FF66C4", dark: "#F73AAF", soft: "#FFE8F5", ink: "#9C1C6A" },
   green: { DEFAULT: "#B1D782", dark: "#94A972", soft: "#EEF6E4", ink: "#4D6330" },
   yellow: { DEFAULT: "#FFDE59", dark: "#E9BF1E", soft: "#FFF7D4", ink: "#7A5B00" },
-  teal: { DEFAULT: "#9AD7C4", dark: "#81BFAC", soft: "#E6F5F0", ink: "#2F6B5A" }
+  teal: { DEFAULT: "#9AD7C4", dark: "#81BFAC", soft: "#E6F5F0", ink: "#2F6B5A", deep: "#2F7A66", deeper: "#255F50" }
 };
 
 module.exports = {

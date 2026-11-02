@@ -3,6 +3,7 @@ import { Footer } from "@/components/site/Footer";
 import { CartProvider } from "@/components/shop/CartProvider";
 import { CartDrawer } from "@/components/shop/CartDrawer";
 import { CartToast } from "@/components/shop/CartToast";
+import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
 import { getCatalog } from "@/lib/server/catalog";
 
 export default async function SiteLayout({ children }) {
@@ -24,6 +25,7 @@ export default async function SiteLayout({ children }) {
       <Header />
       <main id="contenido">{children}</main>
       <Footer />
+      <WhatsAppFloat />
       <CartDrawer />
       <CartToast />
     </CartProvider>

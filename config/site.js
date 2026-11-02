@@ -15,24 +15,26 @@ export const site = {
 
   // Texto de bienvenida: lo primero que se lee debajo del logo.
   welcome: {
-    hello: "¡Hola! 👋 Somos Azu y Jaz, Licenciadas en Terapia Ocupacional.",
+    hello: "¡Hola! Somos Azu y Jaz, Licenciadas en Terapia Ocupacional.",
     paragraphs: [
       "Creamos este espacio para compartir herramientas, ideas y recursos digitales que puedan acompañar y enriquecer las intervenciones con niños, adolescentes y adultos.",
       "Si sos mamá, papá, familiar o acompañante, ¡también vas a encontrar propuestas que pueden serte útiles!"
     ],
-    closing: "✨ ¡Bienvenidos a ADAPTO! Un espacio para aprender, crear y encontrar recursos que acompañen cada etapa de la vida."
+    closing: "¡Bienvenidos a ADAPTO! Un espacio para aprender, crear y encontrar recursos que acompañen cada etapa de la vida."
   },
 
   // Equipo. Las descripciones van cuando las tengan (vacío = no se muestra).
   team: [
-    { name: "Azu", role: "Lic. en Terapia Ocupacional", photo: "/equipo/integrante-1.webp", color: "purple", bio: "" },
-    { name: "Jaz", role: "Lic. en Terapia Ocupacional", photo: "/equipo/integrante-2.webp", color: "teal", bio: "" }
+    { name: "Azu", role: "Lic. en Terapia Ocupacional", photo: "/equipo/integrante-1.webp", bio: "" },
+    { name: "Jaz", role: "Lic. en Terapia Ocupacional", photo: "/equipo/integrante-2.webp", bio: "" }
   ],
 
   contact: {
     // Formato internacional sin "+" ni espacios. Los pedidos llegan acá.
     whatsapp: "5493446525525",
     whatsappLabel: "+54 9 3446 52-5525",
+    // Mensaje que se precarga al tocar el botón fijo de WhatsApp (y los "Escribinos")
+    whatsappMessage: "Hola, ADAPTO. Vi la página y quería hacerles una consulta.",
     email: "",
     // Vacío = no se muestra
     instagram: { handle: "", url: "" }

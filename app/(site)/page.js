@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Plus } from "lucide-react";
+import { ArrowRight, ClipboardList, House, Plus } from "lucide-react";
 import { site } from "@/config/site";
 import { getCatalog } from "@/lib/server/catalog";
 import { colorClass } from "@/lib/colors";
@@ -8,7 +8,6 @@ import { pluralize } from "@/lib/format";
 import { whatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/site/Logo";
-import { Doodle } from "@/components/site/Doodles";
 import { NotebookSheet, TraceSheet } from "@/components/site/HeroSheets";
 import { Reveal } from "@/components/site/Reveal";
 import { StepIcon } from "@/components/site/StepIcon";
@@ -58,12 +57,11 @@ const faqs = [
   },
   {
     q: "¿Puedo compartir o revender el material?",
-    a: "No. Los productos son de uso personal o profesional. Si querés compartirlos con colegas, recomendales ADAPTO 💛"
+    a: "No. Los productos son de uso personal o profesional. Si querés compartirlos con colegas, recomendales ADAPTO."
   }
 ];
 
 const marquee = ["Escritura", "Motricidad fina", "Rutinas", "Emociones", "Vida diaria", "Manejo del dinero", "Estimulación cognitiva", "Seguimiento"];
-const marqueeColors = ["purple", "pink", "green", "yellow", "teal"];
 
 export default async function HomePage() {
   const { subcategories, products } = await getCatalog();
@@ -83,14 +81,6 @@ export default async function HomePage() {
         <TraceSheet className="absolute -left-3 top-24 hidden w-[230px] -rotate-[9deg] drop-shadow-sm xl:block 2xl:left-[4%]" />
         <NotebookSheet className="absolute -right-3 top-[38%] hidden w-[240px] rotate-[7deg] drop-shadow-sm xl:block 2xl:right-[4%]" />
 
-        {/* Trazos sueltos */}
-        <Doodle shape="squiggle" color="pink" className="absolute left-[4%] top-4 hidden h-12 w-14 sm:left-[8%] sm:block sm:top-10 sm:h-16 sm:w-20 xl:left-[17%]" />
-        <Doodle shape="dot" color="teal" className="absolute right-[10%] top-8 h-4 w-4 sm:right-[16%] sm:top-14 xl:right-[22%]" />
-        <Doodle shape="zigzag" color="green" className="absolute right-[3%] top-3 hidden h-12 w-14 sm:right-[7%] sm:block sm:top-24 sm:h-14 sm:w-16 xl:right-[16%] xl:top-[16%]" />
-        <Doodle shape="dot" color="pink" className="absolute left-[12%] top-[42%] hidden h-4 w-4 md:block xl:left-[20%]" />
-        <Doodle shape="curl" color="yellow" className="absolute bottom-16 left-[5%] hidden h-16 w-16 md:block xl:bottom-10 xl:left-[16%]" />
-        <Doodle shape="wave" color="teal" className="absolute bottom-24 right-[6%] hidden h-12 w-16 md:block xl:bottom-12 xl:right-[19%]" />
-        <Doodle shape="dot" color="purple" className="absolute bottom-10 right-[30%] hidden h-3.5 w-3.5 md:block" />
 
         <div className="container-site relative flex flex-col items-center pb-16 pt-14 text-center sm:pb-20 sm:pt-16">
           <h1 className="w-full max-w-[560px] animate-fade-in-up">
@@ -104,7 +94,7 @@ export default async function HomePage() {
                 {paragraph}
               </p>
             ))}
-            <p className="mx-auto mt-6 max-w-[560px] rounded-2xl border-2 border-yellow-dark bg-yellow-soft px-5 py-3.5 text-[16px] font-medium leading-snug sm:text-[17px]">
+            <p className="mx-auto mt-6 max-w-[560px] rounded-2xl bg-teal-soft px-5 py-3.5 text-[16px] font-medium leading-snug text-teal-ink sm:text-[17px]">
               {site.welcome.closing}
             </p>
           </div>
@@ -122,14 +112,13 @@ export default async function HomePage() {
       </section>
 
       {/* Banner en movimiento con los temas */}
-      <div className="relative -rotate-1 overflow-hidden border-y-2 border-tinta bg-tinta py-3" aria-hidden="true">
+      <div className="relative overflow-hidden bg-tinta py-3.5" aria-hidden="true">
         <div className="flex w-max animate-marquee gap-3">
           {[...marquee, ...marquee, ...marquee, ...marquee].map((label, index) => {
-            const color = colorClass(marqueeColors[index % marqueeColors.length]);
             return (
               <span key={`${label}-${index}`} className="flex items-center gap-3">
-                <span className={cn("whitespace-nowrap rounded-full border-2 px-4 py-1 text-[15px] font-semibold", color.bg, color.border)}>{label}</span>
-                <span className="h-2 w-2 rounded-full bg-crema/40" />
+                <span className="whitespace-nowrap px-2 text-[15px] font-medium text-crema/90">{label}</span>
+                <span className="h-1.5 w-1.5 rounded-full bg-teal" />
               </span>
             );
           })}
@@ -159,18 +148,14 @@ export default async function HomePage() {
               <Reveal as="li" key={topic.slug} delay={index * 40} className="flex">
                 <Link
                   href={`/productos?tema=${topic.slug}`}
-                  className={cn(
-                    "group flex w-full flex-col rounded-[24px] border-2 p-4 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 sm:p-5",
-                    color.soft,
-                    color.border,
-                    "hover:shadow-[0_4px_0_currentColor]",
-                    color.text
-                  )}
+                  className="group flex w-full flex-col rounded-[24px] border-2 border-linea bg-white p-4 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-1 hover:border-teal hover:shadow-[0_10px_24px_-16px_rgb(47_122_102/0.45)] sm:p-5"
                 >
-                  <TopicIcon name={topic.icon} color={topic.color} className="h-14 w-14 transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110 sm:h-16 sm:w-16" />
+                  <span className={cn("grid h-14 w-14 place-items-center rounded-2xl sm:h-16 sm:w-16", color.soft)}>
+                    <TopicIcon name={topic.icon} color={topic.color} className="h-10 w-10 transition-transform duration-300 group-hover:scale-110 sm:h-11 sm:w-11" />
+                  </span>
                   <span className="mt-4 text-[16.5px] font-semibold leading-tight text-tinta sm:text-[18px]">{topic.longName || topic.name}</span>
                   {topic.detail ? <span className="mt-1 text-[13px] leading-snug text-tinta/65">{topic.detail}</span> : null}
-                  <span className="mt-auto flex items-center justify-between pt-4 text-[13px] font-semibold">
+                  <span className="mt-auto flex items-center justify-between pt-4 text-[13px] font-semibold text-teal-ink">
                     {count ? pluralize(count, "producto", "productos") : "Muy pronto"}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
@@ -228,12 +213,11 @@ export default async function HomePage() {
             <ol className="relative mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
               <span className="absolute left-[16%] right-[16%] top-11 hidden border-t-[3px] border-dashed border-linea md:block" aria-hidden="true" />
               {steps.map((step, index) => {
-                const color = colorClass(step.color);
                 return (
                   <Reveal as="li" key={step.title} delay={index * 90} className="relative flex flex-col items-center text-center">
-                    <span className={cn("relative grid h-[88px] w-[88px] place-items-center rounded-full border-2 bg-white", color.border)}>
+                    <span className="relative grid h-[88px] w-[88px] place-items-center rounded-full border-2 border-linea bg-white">
                       <StepIcon name={step.icon} color={step.color} className="h-14 w-14" />
-                      <span className={cn("absolute -right-1 -top-1 grid h-8 w-8 place-items-center rounded-full border-2 text-[14px] font-bold", color.bg, color.border)}>
+                      <span className="absolute -right-1 -top-1 grid h-8 w-8 place-items-center rounded-full bg-teal-deep text-[14px] font-bold text-white">
                         {index + 1}
                       </span>
                     </span>
@@ -264,15 +248,19 @@ export default async function HomePage() {
           </h2>
         </Reveal>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
-          <Reveal className="rounded-[28px] border-2 border-purple-dark bg-purple-soft p-6 sm:p-8">
-            <Doodle shape="zigzag" color="purple" className="h-12 w-14" />
+          <Reveal className="rounded-[28px] bg-crema p-6 sm:p-8">
+            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-teal-soft text-teal-ink">
+              <ClipboardList className="h-6 w-6" />
+            </span>
             <h3 className="mt-4 text-[24px] font-semibold">Profesionales</h3>
             <p className="mt-2 text-[16px] leading-relaxed text-tinta/75">
               Herramientas para enriquecer tus intervenciones con niños, adolescentes y adultos, listas para imprimir y llevar a la sesión.
             </p>
           </Reveal>
-          <Reveal delay={90} className="rounded-[28px] border-2 border-yellow-dark bg-yellow-soft p-6 sm:p-8">
-            <Doodle shape="curl" color="pink" className="h-12 w-12" />
+          <Reveal delay={90} className="rounded-[28px] bg-crema p-6 sm:p-8">
+            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-teal-soft text-teal-ink">
+              <House className="h-6 w-6" />
+            </span>
             <h3 className="mt-4 text-[24px] font-semibold">Familias y acompañantes</h3>
             <p className="mt-2 text-[16px] leading-relaxed text-tinta/75">
               Si sos mamá, papá, familiar o acompañante, también vas a encontrar propuestas simples para usar en casa.
@@ -288,11 +276,10 @@ export default async function HomePage() {
           <Reveal className="flex justify-center">
             <div className="flex items-start -space-x-6">
               {site.team.map((person, index) => {
-                const color = colorClass(person.color);
                 return (
-                  <div key={person.name} className={cn("relative rounded-full border-[3px] bg-white p-1", color.border, index === 1 && "mt-10")}>
+                  <div key={person.name} className={cn("relative rounded-full border-[3px] border-teal bg-white p-1", index === 1 && "mt-10")}>
                     <Image src={person.photo} alt={`${person.name}, ${person.role}`} width={170} height={170} className="h-32 w-32 rounded-full object-cover sm:h-40 sm:w-40" />
-                    <span className={cn("absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full border-2 px-3 py-0.5 text-[14px] font-semibold", color.bg, color.border)}>
+                    <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-teal-deep px-3 py-0.5 text-[14px] font-semibold text-white">
                       {person.name}
                     </span>
                   </div>
@@ -325,7 +312,7 @@ export default async function HomePage() {
               Preguntas frecuentes
             </h2>
             <p className="mt-3 text-[16px] text-gris">¿No encontrás tu respuesta? Escribinos y te ayudamos.</p>
-            <a href={whatsappUrl("¡Hola ADAPTO! 👋 Tengo una consulta.")} target="_blank" rel="noopener noreferrer" className="btn-whatsapp mt-5">
+            <a href={whatsappUrl(site.contact.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="btn-whatsapp mt-5">
               <WhatsAppIcon className="h-4 w-4" />
               Escribinos
             </a>

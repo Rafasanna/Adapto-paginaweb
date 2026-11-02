@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { site } from "@/config/site";
+import { whatsappUrl } from "@/lib/whatsapp";
 import { categories, subcategories } from "@/config/catalog";
 import { Logo } from "./Logo";
-import { Doodle } from "./Doodles";
 import { InstagramIcon, WhatsAppIcon } from "./icons";
 
 export function Footer() {
@@ -20,7 +20,6 @@ export function Footer() {
         <span className="flex-1 bg-teal" />
       </div>
 
-      <Doodle shape="squiggle" color="green" className="absolute right-[4%] top-10 hidden h-14 w-20 lg:block" />
 
       <div className="container-site relative grid grid-cols-2 gap-x-6 gap-y-10 py-14 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
         <div className="col-span-2 lg:col-span-1">
@@ -29,7 +28,7 @@ export function Footer() {
             Recursos terapéuticos listos para imprimir, creados por Azu y Jaz, Licenciadas en Terapia Ocupacional.
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
-            <a href={`https://wa.me/${site.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-whatsapp min-h-[42px] px-4 text-[14px]">
+            <a href={whatsappUrl(site.contact.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="btn-whatsapp min-h-[42px] px-4 text-[14px]">
               <WhatsAppIcon className="h-4 w-4" />
               {site.contact.whatsappLabel}
             </a>

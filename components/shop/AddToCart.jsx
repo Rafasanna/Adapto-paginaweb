@@ -39,9 +39,9 @@ export function AddToCart({ product, subcategoryName }) {
         href={whatsappUrl(directMessage)}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-3 inline-flex items-center gap-2 text-[15px] font-medium underline decoration-green-dark decoration-2 underline-offset-4 hover:decoration-tinta"
+        className="mt-3 inline-flex items-center gap-2 text-[15px] font-medium underline decoration-teal decoration-2 underline-offset-4 hover:decoration-tinta"
       >
-        <WhatsAppIcon className="h-4 w-4 text-green-ink" />
+        <WhatsAppIcon className="h-4 w-4 text-teal-ink" />
         Pedir solo este producto por WhatsApp
       </a>
     </div>

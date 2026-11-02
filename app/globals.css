@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 /* Sistema visual de ADAPTO
-   La firma del logo: letras con relleno pastel y un borde del mismo tono, más oscuro.
-   Esa idea se repite en botones, chips, íconos y bloques de color ("sticker"). */
+   Interfaz sobria: blanco, crema y el verde agua de la "T" y la "O" como color principal.
+   El color del resto del logo aparece solo en el logo y en los íconos de cada tema. */
 
 @layer base {
   html {
@@ -25,11 +25,11 @@
   }
 
   ::selection {
-    @apply bg-yellow text-tinta;
+    @apply bg-teal text-tinta;
   }
 
   :focus-visible {
-    @apply outline outline-2 outline-offset-2 outline-purple-dark;
+    @apply outline outline-2 outline-offset-2 outline-teal-deep;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -59,15 +59,15 @@
     @apply text-[13px] font-semibold uppercase tracking-[0.12em] text-gris;
   }
 
-  /* Botones en píldora con el borde del logo */
+  /* Botones en píldora */
   .btn {
     @apply inline-flex min-h-[46px] items-center justify-center gap-2 rounded-full border-2 px-5 text-[15px] font-semibold transition-[transform,background-color,border-color,box-shadow] duration-200 ease-out active:translate-y-px disabled:pointer-events-none disabled:opacity-50;
   }
   .btn-primary {
-    @apply btn border-pink-dark bg-pink text-tinta hover:-translate-y-0.5 hover:shadow-[0_3px_0_theme(colors.pink.dark)];
+    @apply btn border-teal-deep bg-teal-deep text-white hover:-translate-y-0.5 hover:border-teal-deeper hover:bg-teal-deeper;
   }
   .btn-whatsapp {
-    @apply btn border-green-dark bg-green text-tinta hover:-translate-y-0.5 hover:shadow-[0_3px_0_theme(colors.green.dark)];
+    @apply btn border-teal bg-teal-soft text-teal-ink hover:-translate-y-0.5 hover:border-teal-dark hover:bg-teal/40;
   }
   .btn-ink {
     @apply btn border-tinta bg-tinta text-crema hover:-translate-y-0.5 hover:bg-[#45403b];

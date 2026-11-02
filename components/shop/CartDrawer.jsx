@@ -72,8 +72,8 @@ export function CartDrawer() {
 
         {cart.items.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center px-8 text-center">
-            <span className="grid h-20 w-20 place-items-center rounded-full border-2 border-pink-dark bg-pink-soft">
-              <ShoppingBag className="h-8 w-8 text-pink-ink" />
+            <span className="grid h-20 w-20 place-items-center rounded-full bg-teal-soft">
+              <ShoppingBag className="h-8 w-8 text-teal-ink" />
             </span>
             <p className="mt-5 text-[18px] font-semibold">Tu carrito está vacío</p>
             <p className="mt-1 text-[15px] text-gris">Elegí los productos que quieras y armá tu pedido.</p>
@@ -139,7 +139,7 @@ export function CartDrawer() {
                   autoComplete="given-name"
                   maxLength={60}
                   placeholder="Para saber quién nos escribe"
-                  className="mt-1 h-11 w-full rounded-xl border-2 border-linea bg-white px-3 text-[15px] outline-none transition-colors placeholder:text-gris/70 focus:border-purple"
+                  className="mt-1 h-11 w-full rounded-xl border-2 border-linea bg-white px-3 text-[15px] outline-none transition-colors placeholder:text-gris/70 focus:border-teal-deep"
                 />
               </label>
 
@@ -148,7 +148,7 @@ export function CartDrawer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setSent(true)}
-                className="btn-whatsapp mt-4 w-full text-[16px]"
+                className="btn-primary mt-4 w-full text-[16px]"
               >
                 <WhatsAppIcon className="h-5 w-5" />
                 Enviar pedido por WhatsApp
@@ -158,7 +158,7 @@ export function CartDrawer() {
               </p>
 
               {sent ? (
-                <div className="mt-3 flex items-center justify-between gap-3 rounded-xl bg-green-soft px-3 py-2.5 text-[14px]">
+                <div className="mt-3 flex items-center justify-between gap-3 rounded-xl bg-teal-soft px-3 py-2.5 text-[14px]">
                   <span>¿Ya enviaste el pedido?</span>
                   <button
                     type="button"

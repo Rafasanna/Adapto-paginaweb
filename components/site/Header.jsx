@@ -6,14 +6,13 @@ import { Suspense, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Menu, Search, ShoppingBag, X } from "lucide-react";
 import { site } from "@/config/site";
+import { whatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
-import { colorClass } from "@/lib/colors";
 import { useCart } from "@/components/shop/CartProvider";
 import { Logo } from "./Logo";
 import { HeaderSearch } from "./HeaderSearch";
 import { WhatsAppIcon } from "./icons";
 
-const navColors = ["purple", "pink", "green", "yellow", "teal"];
 
 export function Header() {
   const pathname = usePathname();
@@ -72,14 +71,14 @@ export function Header() {
     <button
       type="button"
       onClick={cart.open}
-      className="relative grid h-11 w-11 place-items-center rounded-full border-2 border-transparent bg-crema transition-colors hover:border-pink-dark hover:bg-pink-soft"
+      className="relative grid h-11 w-11 place-items-center rounded-full border-2 border-transparent bg-crema transition-colors hover:border-teal hover:bg-teal-soft"
       aria-label={cart.count ? `Abrir carrito, ${cart.count} productos` : "Abrir carrito"}
     >
       <ShoppingBag className="h-[20px] w-[20px]" strokeWidth={2.2} />
       {cart.ready && cart.count > 0 ? (
         <span
           key={cart.bump}
-          className="absolute -right-1.5 -top-1.5 grid h-[22px] min-w-[22px] animate-pop place-items-center rounded-full border-2 border-white bg-pink px-1 text-[11px] font-bold tabular-nums text-tinta"
+          className="absolute -right-1.5 -top-1.5 grid h-[22px] min-w-[22px] animate-pop place-items-center rounded-full border-2 border-white bg-teal-deep px-1 text-[11px] font-bold tabular-nums text-white"
         >
           {cart.count > 99 ? "99+" : cart.count}
         </span>
@@ -93,7 +92,7 @@ export function Header() {
       role="dialog"
       aria-modal="true"
       aria-label="Menú"
-      className="bg-dots fixed inset-0 z-50 flex animate-fade-in flex-col overflow-y-auto bg-crema md:hidden"
+      className="fixed inset-0 z-50 flex animate-fade-in flex-col overflow-y-auto bg-crema md:hidden"
     >
       <div className="container-site flex h-16 shrink-0 items-center justify-between">
         <Link href="/" onClick={(event) => handleNav(event, "/")} aria-label="ADAPTO, ir al inicio">
@@ -106,22 +105,21 @@ export function Header() {
       <nav aria-label="Principal" className="container-site flex flex-1 flex-col pb-10 pt-8">
         <ul className="grid gap-2.5">
           {site.nav.map((item, index) => {
-            const color = colorClass(navColors[index % navColors.length]);
             return (
               <li key={item.href} className="animate-fade-in-up" style={{ animationDelay: `${50 + index * 50}ms` }}>
                 <Link
                   href={item.href}
                   onClick={(event) => handleNav(event, item.href)}
-                  className={cn("flex items-center gap-3 rounded-2xl border-2 px-4 py-3.5 text-[24px] font-semibold", color.border, color.soft)}
+                  className="flex items-center gap-3 rounded-2xl border-2 border-linea bg-white px-4 py-3.5 text-[24px] font-semibold"
                 >
-                  <span className={cn("h-3 w-3 rounded-full", color.bg)} aria-hidden="true" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-teal" aria-hidden="true" />
                   {item.label}
                 </Link>
               </li>
             );
           })}
         </ul>
-        <a href={`https://wa.me/${site.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-whatsapp mt-auto self-start">
+        <a href={whatsappUrl(site.contact.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="btn-whatsapp mt-auto self-start">
           <WhatsAppIcon className="h-5 w-5" />
           Escribinos
         </a>
@@ -169,7 +167,7 @@ export function Header() {
             onClick={() => setSearchOpen((value) => !value)}
             className={cn(
               "grid h-11 w-11 place-items-center rounded-full border-2 transition-colors lg:hidden",
-              searchOpen ? "border-purple bg-purple-soft" : "border-transparent bg-crema hover:border-purple"
+              searchOpen ? "border-teal bg-teal-soft" : "border-transparent bg-crema hover:border-teal"
             )}
             aria-label={searchOpen ? "Cerrar buscador" : "Buscar productos"}
             aria-expanded={searchOpen}
@@ -199,14 +197,8 @@ export function Header() {
         </div>
       ) : null}
 
-      {/* Franja con los 5 colores del logo */}
-      <div className="flex h-[4px]" aria-hidden="true">
-        <span className="flex-1 bg-purple" />
-        <span className="flex-1 bg-pink" />
-        <span className="flex-1 bg-green" />
-        <span className="flex-1 bg-yellow" />
-        <span className="flex-1 bg-teal" />
-      </div>
+      {/* Línea en el verde agua de la "T" y la "O" */}
+      <div className="h-[3px] bg-teal" aria-hidden="true" />
 
       {open && mounted ? createPortal(mobileMenu, document.body) : null}
     </header>

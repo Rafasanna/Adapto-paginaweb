@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import { Check, ChevronDown, SlidersHorizontal, X } from "lucide-react";
 import { audiences, sortOptions } from "@/config/catalog";
 import { site } from "@/config/site";
+import { whatsappUrl } from "@/lib/whatsapp";
 import { normalize, pluralize } from "@/lib/format";
 import { colorClass } from "@/lib/colors";
 import { cn } from "@/lib/utils";
@@ -112,13 +113,13 @@ export function Catalog({ categories, subcategories, products }) {
           aria-expanded={panelOpen}
           className={cn(
             "chip min-h-[44px] gap-2 px-4 text-[15px] font-semibold",
-            filterCount ? "border-tinta bg-tinta text-crema" : "border-tinta/80 bg-white hover:bg-crema"
+            filterCount ? "border-teal-deep bg-teal-deep text-white" : "border-tinta/80 bg-white hover:bg-crema"
           )}
         >
           <SlidersHorizontal className="h-4 w-4" strokeWidth={2.4} />
           Filtros
           {filterCount ? (
-            <span className="grid h-5 min-w-5 place-items-center rounded-full bg-yellow px-1 text-[12px] font-bold text-tinta">{filterCount}</span>
+            <span className="grid h-5 min-w-5 place-items-center rounded-full bg-teal px-1 text-[12px] font-bold text-tinta">{filterCount}</span>
           ) : null}
         </button>
 
@@ -154,7 +155,7 @@ export function Catalog({ categories, subcategories, products }) {
           <select
             value={sort}
             onChange={(event) => update({ orden: event.target.value })}
-            className="h-11 cursor-pointer appearance-none rounded-full border-2 border-transparent bg-transparent pl-3 pr-9 text-right text-[15px] font-medium outline-none hover:bg-crema focus:border-purple"
+            className="h-11 cursor-pointer appearance-none rounded-full border-2 border-transparent bg-transparent pl-3 pr-9 text-right text-[15px] font-medium outline-none hover:bg-crema focus:border-teal-deep"
           >
             {sortOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -261,16 +262,15 @@ function FilterPanel({ onClose, categories, subcategories, category, topic, audi
           <fieldset>
             <legend className="eyebrow">Categoría</legend>
             <div className="mt-3 flex flex-wrap gap-2">
-              {[{ slug: "", name: "Todo", color: "yellow" }, ...categories].map((item) => {
+              {[{ slug: "", name: "Todo" }, ...categories].map((item) => {
                 const active = category === item.slug;
-                const color = colorClass(item.color);
                 return (
                   <button
                     key={item.slug || "todo"}
                     type="button"
                     aria-pressed={active}
                     onClick={() => update({ categoria: item.slug, tema: "" })}
-                    className={cn("chip min-h-[42px] px-4 text-[15px] font-semibold", active ? cn(color.bg, color.border) : "border-linea bg-white hover:border-tinta/30")}
+                    className={cn("chip min-h-[42px] px-4 text-[15px] font-semibold", active ? "border-teal-deep bg-teal-deep text-white" : "border-linea bg-white hover:border-tinta/30")}
                   >
                     {item.name}
                   </button>
@@ -294,7 +294,7 @@ function FilterPanel({ onClose, categories, subcategories, category, topic, audi
                       onClick={() => update({ tema: active ? "" : item.slug, categoria: active ? category : item.category })}
                       className={cn(
                         "flex w-full items-center gap-3 rounded-2xl border-2 py-1.5 pl-1.5 pr-3 text-left transition-colors",
-                        active ? cn(color.soft, color.border) : "border-transparent hover:bg-white"
+                        active ? "border-teal bg-teal-soft" : "border-transparent hover:bg-white"
                       )}
                     >
                       <span className={cn("grid h-10 w-10 shrink-0 place-items-center rounded-xl", active ? "bg-white" : color.soft)}>
@@ -327,7 +327,7 @@ function FilterPanel({ onClose, categories, subcategories, category, topic, audi
                     type="button"
                     aria-pressed={active}
                     onClick={() => update({ para: active ? "" : item.slug })}
-                    className={cn("chip min-h-[42px] px-4 text-[15px]", active ? "border-tinta bg-tinta text-crema" : "border-linea bg-white hover:border-tinta/40")}
+                    className={cn("chip min-h-[42px] px-4 text-[15px]", active ? "border-teal-deep bg-teal-deep text-white" : "border-linea bg-white hover:border-tinta/40")}
                   >
                     {item.name}
                   </button>
@@ -359,7 +359,7 @@ function FilterPanel({ onClose, categories, subcategories, category, topic, audi
 function EmptyState({ noProducts, onClear }) {
   return (
     <div className="mx-auto mt-14 max-w-md text-center">
-      <TopicIcon name={noProducts ? "cognitiva" : "emociones"} color={noProducts ? "yellow" : "teal"} className="mx-auto h-20 w-20" />
+      <TopicIcon name={noProducts ? "cognitiva" : "emociones"} color="teal" className="mx-auto h-20 w-20" />
       <p className="title mt-4 text-[22px]">{noProducts ? "Estamos preparando los primeros productos" : "No encontramos productos con esos filtros"}</p>
       <p className="mt-2 text-[15px] text-gris">
         {noProducts
@@ -372,7 +372,7 @@ function EmptyState({ noProducts, onClear }) {
             Limpiar filtros
           </button>
         ) : null}
-        <Link href={`https://wa.me/${site.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-whatsapp">
+        <Link href={whatsappUrl(site.contact.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="btn-whatsapp">
           <WhatsAppIcon className="h-4 w-4" />
           Consultar
         </Link>

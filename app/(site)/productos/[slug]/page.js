@@ -4,10 +4,8 @@ import { ChevronRight, FileText, MessageCircle, Printer, ShoppingBag } from "luc
 import { audiences } from "@/config/catalog";
 import { site } from "@/config/site";
 import { getCatalog, getProduct } from "@/lib/server/catalog";
-import { colorClass } from "@/lib/colors";
 import { pluralize } from "@/lib/format";
 import { buildProductQuestion, whatsappUrl } from "@/lib/whatsapp";
-import { cn } from "@/lib/utils";
 import { ProductGallery } from "@/components/shop/ProductGallery";
 import { AddToCart } from "@/components/shop/AddToCart";
 import { Price } from "@/components/shop/Price";
@@ -41,7 +39,6 @@ export default async function ProductPage({ params }) {
   const { product, related, catalog } = data;
   const subcategory = catalog.subcategories.find((item) => item.slug === product.subcategory) || null;
   const category = catalog.categories.find((item) => item.slug === product.category) || null;
-  const color = colorClass(subcategory?.color || category?.color || "purple");
   const audienceNames = audiences.filter((item) => product.audiences.includes(item.slug)).map((item) => item.name);
   const subBySlug = new Map(catalog.subcategories.map((item) => [item.slug, item]));
 
@@ -71,13 +68,13 @@ export default async function ProductPage({ params }) {
       </nav>
 
       <div className="mt-5 grid gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-14">
-        <ProductGallery previews={product.previews} name={product.name} color={color.soft} />
+        <ProductGallery previews={product.previews} name={product.name} color="bg-crema" />
 
         <div className="lg:sticky lg:top-24 lg:self-start">
           {subcategory ? (
             <Link
               href={`/productos?tema=${subcategory.slug}`}
-              className={cn("inline-flex items-center gap-1.5 rounded-full border-2 py-0.5 pl-1 pr-3 text-[14px] font-semibold", color.soft, color.border)}
+              className="inline-flex items-center gap-1.5 rounded-full border-2 border-linea bg-white py-0.5 pl-1 pr-3 text-[14px] font-semibold hover:border-teal"
             >
               <TopicIcon name={subcategory.icon} color={subcategory.color} className="h-7 w-7" />
               {subcategory.longName || subcategory.name}
@@ -115,20 +112,20 @@ export default async function ProductPage({ params }) {
 
           <ol className="mt-8 grid gap-3 rounded-[22px] bg-crema p-5 text-[15px]">
             <li className="flex gap-3">
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-pink-soft">
-                <ShoppingBag className="h-4 w-4 text-pink-ink" />
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-teal-soft">
+                <ShoppingBag className="h-4 w-4 text-teal-ink" />
               </span>
               <span>Sumás al carrito los productos que quieras, con la cantidad que necesites.</span>
             </li>
             <li className="flex gap-3">
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-purple-soft">
-                <MessageCircle className="h-4 w-4 text-purple-ink" />
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-teal-soft">
+                <MessageCircle className="h-4 w-4 text-teal-ink" />
               </span>
               <span>Nos enviás el pedido por WhatsApp y te pasamos los datos de pago.</span>
             </li>
             <li className="flex gap-3">
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-green-soft">
-                <Printer className="h-4 w-4 text-green-ink" />
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-teal-soft">
+                <Printer className="h-4 w-4 text-teal-ink" />
               </span>
               <span>Te enviamos el PDF y lo imprimís las veces que quieras.</span>
             </li>

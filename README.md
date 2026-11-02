@@ -43,12 +43,12 @@ public/equipo/              Fotos de Azu y Jaz
 
 ## Identidad
 
-- Colores del logo: violeta `#CB6CE6`, rosa `#FF66C4`, verde `#B1D782`, amarillo `#FFDE59`, verde agua `#9AD7C4`. Cada uno tiene su borde más oscuro (como las letras del logo), un fondo suave y un tono para texto. Ver `tailwind.config.js`.
-- Fondo crema `#F8F3EA` y gris `#737373`, tomados del PDF.
+- Interfaz sobria: blanco y crema `#F8F3EA`, con el verde agua de la "T" y la "O" como color principal (botones, etiquetas, detalles). Ver `teal` en `tailwind.config.js`.
+- Los otros colores del logo (violeta, rosa, verde, amarillo) aparecen solo en el logo, en los íconos de cada tema y en la franja del footer.
 - Tipografía: **Outfit** (geométrica, de la familia de Codec Pro, la del "Recursos digitales").
-- Íconos propios por tema con el estilo del logo: relleno pastel + contorno del mismo tono.
-- Decoración: solo trazos de línea (ondas, zigzag, rulos, puntos). Sin corazones ni estrellas.
-- Fondos: header blanco con franja de 5 colores; secciones que alternan blanco y crema; hoja cuadriculada (`.bg-grid`) en el inicio y en los títulos de página.
+- Sin emojis ni dibujitos decorativos: la página no tiene que verse aniñada.
+- Hoja cuadriculada (`.bg-grid`) en el inicio y en los títulos de página.
+- Botón fijo de WhatsApp abajo a la derecha (`components/site/WhatsAppFloat.jsx`); el mensaje predeterminado está en `config/site.js` → `contact.whatsappMessage`.
 
 ## Carrito y pedido
 
@@ -57,7 +57,7 @@ public/equipo/              Fotos de Azu y Jaz
 - "Enviar pedido por WhatsApp" abre `wa.me/5493446525525` con este mensaje:
 
 ```text
-¡Hola ADAPTO! 👋 Quiero hacer este pedido:
+Hola, ADAPTO. Quiero hacer este pedido:
 
 • 3 x Trazos y grafismos ($ 4.500 c/u) → $ 13.500
 • 1 x Mi rutina de la mañana y la noche → $ 3.500
@@ -66,7 +66,7 @@ Unidades: 4
 *Total: $ 17.000*
 
 Mi nombre es Rafa.
-¿Cómo sigo con el pago? ¡Gracias!
+¿Cómo sigo con el pago? Gracias.
 ```
 
 El número se cambia en `config/site.js`.

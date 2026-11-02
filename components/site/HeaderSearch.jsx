@@ -77,7 +77,7 @@ export function HeaderSearch({ className, inputClassName, autoFocus = false, onS
         }}
         placeholder="Buscar productos…"
         className={cn(
-          "h-11 w-full rounded-full border-2 border-linea bg-white pl-10 pr-10 text-[15px] outline-none transition-colors placeholder:text-gris/80 focus:border-purple [&::-webkit-search-cancel-button]:hidden",
+          "h-11 w-full rounded-full border-2 border-linea bg-white pl-10 pr-10 text-[15px] outline-none transition-colors placeholder:text-gris/80 focus:border-teal-deep [&::-webkit-search-cancel-button]:hidden",
           inputClassName
         )}
       />

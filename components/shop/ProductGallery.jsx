@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 // Galería del detalle: las páginas del documento pasan solas (se pausa al tocar),
 // con flechas, deslizamiento en mobile y miniaturas.
-export function ProductGallery({ previews = [], name, color = "bg-purple-soft" }) {
+export function ProductGallery({ previews = [], name, color = "bg-crema" }) {
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
   const touch = useRef(null);

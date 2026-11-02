@@ -12,7 +12,7 @@ export function Price({ price, compareAtPrice, className, size = "md" }) {
             <span className="sr-only">Antes </span>
             {formatPrice(compareAtPrice)}
           </span>
-          <span className="rounded-full bg-yellow px-2 py-0.5 text-[12px] font-bold text-tinta">
+          <span className="rounded-full bg-teal-soft px-2 py-0.5 text-[12px] font-bold text-teal-ink">
             -{Math.round((1 - price / compareAtPrice) * 100)}%
           </span>
         </>

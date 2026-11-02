@@ -1,11 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Layers, Printer, Users } from "lucide-react";
 import { site } from "@/config/site";
-import { colorClass } from "@/lib/colors";
 import { whatsappUrl } from "@/lib/whatsapp";
-import { cn } from "@/lib/utils";
-import { Doodle } from "@/components/site/Doodles";
 import { Reveal } from "@/components/site/Reveal";
 import { WhatsAppIcon } from "@/components/site/icons";
 
@@ -16,20 +13,17 @@ export const metadata = {
 
 const values = [
   {
-    shape: "zigzag",
-    color: "purple",
+    icon: Layers,
     title: "Desde la práctica",
     text: "Herramientas e ideas pensadas para acompañar y enriquecer intervenciones reales."
   },
   {
-    shape: "curl",
-    color: "pink",
+    icon: Printer,
     title: "Listos para imprimir",
     text: "Recursos digitales claros, ordenados y fáciles de usar en la sesión, el aula o la casa."
   },
   {
-    shape: "wave",
-    color: "green",
+    icon: Users,
     title: "Para cada etapa",
     text: "Propuestas para niños, adolescentes y adultos, y también para sus familias y acompañantes."
   }
@@ -39,13 +33,10 @@ export default function NosotrasPage() {
   return (
     <>
       <section className="bg-grid relative overflow-hidden border-b-2 border-linea">
-        <Doodle shape="squiggle" color="pink" className="absolute right-[8%] top-10 hidden h-14 w-20 sm:block" />
-        <Doodle shape="dot" color="teal" className="absolute bottom-12 right-[22%] hidden h-4 w-4 sm:block" />
-        <Doodle shape="curl" color="yellow" className="absolute bottom-8 right-[6%] hidden h-14 w-14 md:block" />
         <div className="container-site relative pb-14 pt-10 sm:pt-16">
           <p className="eyebrow">Nosotras</p>
           <h1 className="title mt-2 max-w-3xl text-[42px] sm:text-[60px]">Somos Azu y Jaz</h1>
-          <p className="mt-3 text-[19px] font-semibold text-purple-ink sm:text-[21px]">Licenciadas en Terapia Ocupacional</p>
+          <p className="mt-3 text-[19px] font-semibold text-teal-ink sm:text-[21px]">Licenciadas en Terapia Ocupacional</p>
           <p className="mt-4 max-w-2xl text-[17px] leading-relaxed text-tinta/75 sm:text-[18px]">{site.welcome.paragraphs[0]}</p>
         </div>
       </section>
@@ -53,16 +44,10 @@ export default function NosotrasPage() {
       <section className="container-site py-16 sm:py-20" aria-label="Equipo">
         <ul className="grid gap-6 sm:grid-cols-2 lg:gap-10">
           {site.team.map((person, index) => {
-            const color = colorClass(person.color);
             return (
-              <Reveal as="li" key={person.name} delay={index * 100} className={cn("rounded-[32px] border-2 p-6 sm:p-8", color.soft, color.border)}>
+              <Reveal as="li" key={person.name} delay={index * 100} className="rounded-[32px] bg-white p-6 sm:p-8">
                 <div className="relative mx-auto w-full max-w-[260px] sm:max-w-[300px]">
-                  <Doodle
-                    shape={index === 0 ? "squiggle" : "zigzag"}
-                    color={index === 0 ? "pink" : "yellow"}
-                    className="absolute -right-4 top-0 z-10 h-12 w-16"
-                  />
-                  <div className={cn("rounded-full border-[3px] bg-white p-2", color.border)}>
+                  <div className="rounded-full border-[3px] border-teal bg-white p-2">
                     <Image
                       src={person.photo}
                       alt={`${person.name}, ${person.role}`}
@@ -75,7 +60,7 @@ export default function NosotrasPage() {
                 </div>
                 <div className="mt-6 text-center">
                   <h2 className="title text-[34px]">{person.name}</h2>
-                  <p className={cn("mt-1 text-[16px] font-semibold", color.text)}>{person.role}</p>
+                  <p className="mt-1 text-[16px] font-semibold text-teal-ink">{person.role}</p>
                   {person.bio ? <p className="mx-auto mt-4 max-w-md text-[16px] leading-relaxed text-tinta/75">{person.bio}</p> : null}
                 </div>
               </Reveal>
@@ -86,7 +71,7 @@ export default function NosotrasPage() {
 
       <section className="bg-white py-20 sm:py-24" aria-labelledby="por-que">
         <div className="container-site">
-        <Reveal className="max-w-2xl">
+          <Reveal className="max-w-2xl">
           <p className="eyebrow">Por qué ADAPTO</p>
           <h2 id="por-que" className="title mt-2 text-[34px] sm:text-[44px]">
             Un espacio para aprender, crear y encontrar recursos
@@ -95,7 +80,9 @@ export default function NosotrasPage() {
         <ul className="mt-8 grid gap-4 md:grid-cols-3">
           {values.map((value, index) => (
             <Reveal as="li" key={value.title} delay={index * 80} className="rounded-[26px] bg-crema p-6">
-              <Doodle shape={value.shape} color={value.color} className="h-12 w-12" />
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-teal-soft text-teal-ink">
+                <value.icon className="h-6 w-6" />
+              </span>
               <h3 className="mt-4 text-[20px] font-semibold">{value.title}</h3>
               <p className="mt-2 text-[15.5px] leading-relaxed text-tinta/70">{value.text}</p>
             </Reveal>
@@ -111,7 +98,7 @@ export default function NosotrasPage() {
             <p className="mt-2 max-w-lg text-[16px] text-crema/75">Contanos qué necesitás trabajar y te recomendamos el producto indicado.</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <a href={whatsappUrl("¡Hola Azu y Jaz! 👋 Les quería consultar por un producto.")} target="_blank" rel="noopener noreferrer" className="btn-whatsapp">
+            <a href={whatsappUrl("Hola, Azu y Jaz. Les quería consultar por un producto.")} target="_blank" rel="noopener noreferrer" className="btn-whatsapp">
               <WhatsAppIcon className="h-4 w-4" />
               Escribinos
             </a>

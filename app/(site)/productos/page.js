@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import { Catalog } from "@/components/shop/Catalog";
-import { Doodle } from "@/components/site/Doodles";
 import { getCatalog } from "@/lib/server/catalog";
 
 export const revalidate = 300;
@@ -16,8 +15,6 @@ export default async function ProductosPage() {
   return (
     <div className="bg-white pb-24">
       <header className="bg-grid relative overflow-hidden border-b-2 border-linea">
-        <Doodle shape="squiggle" color="green" className="absolute right-[8%] top-8 hidden h-14 w-20 md:block" />
-        <Doodle shape="dot" color="pink" className="absolute bottom-10 right-[20%] hidden h-4 w-4 md:block" />
         <div className="container-site relative py-7 sm:py-10 lg:py-14">
           <p className="eyebrow">Tienda</p>
           <div className="max-w-2xl">
