@@ -87,16 +87,10 @@ export default async function HomePage() {
             <Logo priority className="h-auto w-full" alt="ADAPTO · Recursos digitales" />
           </h1>
 
-          <div className="mt-9 max-w-[640px] animate-fade-in-up [animation-delay:120ms]">
-            <p className="text-[21px] font-semibold leading-snug sm:text-[24px]">{site.welcome.hello}</p>
-            {site.welcome.paragraphs.map((paragraph) => (
-              <p key={paragraph.slice(0, 20)} className="mt-4 text-[16.5px] leading-relaxed text-tinta/75 sm:text-[17.5px]">
-                {paragraph}
-              </p>
-            ))}
-            <p className="mx-auto mt-6 max-w-[560px] rounded-2xl bg-teal-soft px-5 py-3.5 text-[16px] font-medium leading-snug text-teal-ink sm:text-[17px]">
-              {site.welcome.closing}
-            </p>
+          {/* Debajo del logo: primero la bienvenida y después quiénes somos */}
+          <div className="mt-9 max-w-[620px] animate-fade-in-up [animation-delay:120ms]">
+            <p className="text-[21px] font-semibold leading-snug sm:text-[25px]">{site.welcome.closing}</p>
+            <p className="mt-4 text-[17px] leading-relaxed text-teal-ink sm:text-[19px]">{site.welcome.who}</p>
           </div>
 
           <div className="mt-8 flex animate-fade-in-up flex-wrap justify-center gap-3 [animation-delay:220ms]">
@@ -105,7 +99,7 @@ export default async function HomePage() {
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link href="/nosotras" className="btn-outline px-6 text-[16px]">
-              Conocernos
+              Conocenos
             </Link>
           </div>
         </div>
@@ -296,7 +290,7 @@ export default async function HomePage() {
               Licenciadas en Terapia Ocupacional. Creamos ADAPTO para compartir herramientas, ideas y recursos que acompañen cada etapa de la vida.
             </p>
             <Link href="/nosotras" className="btn-ink mt-6">
-              Conocernos
+              Conocenos
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Reveal>

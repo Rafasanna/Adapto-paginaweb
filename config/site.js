@@ -13,8 +13,9 @@ export const site = {
     letters: "/brand/adapto-letters.svg" // solo letras (header)
   },
 
-  // Texto de bienvenida: lo primero que se lee debajo del logo.
+  // Inicio: debajo del logo va primero "closing" (la bienvenida) y después "who".
   welcome: {
+    who: "Somos Azu y Jaz, Licenciadas en Terapia Ocupacional.",
     hello: "¡Hola! Somos Azu y Jaz, Licenciadas en Terapia Ocupacional.",
     paragraphs: [
       "Creamos este espacio para compartir herramientas, ideas y recursos digitales que puedan acompañar y enriquecer las intervenciones con niños, adolescentes y adultos.",
