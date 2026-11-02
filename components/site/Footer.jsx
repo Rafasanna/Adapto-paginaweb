@@ -10,7 +10,7 @@ export function Footer() {
   const actividades = subcategories.filter((item) => item.category === "actividades");
 
   return (
-    <footer className="relative mt-24 overflow-hidden border-t-2 border-linea bg-papel">
+    <footer className="relative overflow-hidden bg-crema">
       {/* Franja con los 5 colores del logo */}
       <div className="flex h-2" aria-hidden="true">
         <span className="flex-1 bg-purple" />
@@ -20,7 +20,7 @@ export function Footer() {
         <span className="flex-1 bg-teal" />
       </div>
 
-      <Doodle shape="flower" color="pink" className="absolute -right-6 top-10 hidden h-28 w-28 rotate-12 opacity-90 lg:block" />
+      <Doodle shape="squiggle" color="green" className="absolute right-[4%] top-10 hidden h-14 w-20 lg:block" />
 
       <div className="container-site relative grid grid-cols-2 gap-x-6 gap-y-10 py-14 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
         <div className="col-span-2 lg:col-span-1">
@@ -65,7 +65,7 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-[15px]">
             {actividades.map((item) => (
               <li key={item.slug}>
-                <Link href={`/recursos?tema=${item.slug}`} className="link-underline">
+                <Link href={`/productos?tema=${item.slug}`} className="link-underline">
                   {item.name}
                 </Link>
               </li>
@@ -80,7 +80,7 @@ export function Footer() {
               .filter((item) => item.category === "guias")
               .map((item) => (
                 <li key={item.slug}>
-                  <Link href={`/recursos?tema=${item.slug}`} className="link-underline">
+                  <Link href={`/productos?tema=${item.slug}`} className="link-underline">
                     {item.name}
                   </Link>
                 </li>
@@ -91,7 +91,7 @@ export function Footer() {
 
       <div className="container-site flex flex-col gap-2 border-t-2 border-linea py-6 text-[13px] text-gris sm:flex-row sm:items-center sm:justify-between">
         <p>© {year} ADAPTO · Recursos digitales</p>
-        <p>Los recursos son de uso personal o profesional. No se permite su reventa ni distribución.</p>
+        <p>Los productos son de uso personal o profesional. No se permite su reventa ni distribución.</p>
       </div>
     </footer>
   );

@@ -106,6 +106,14 @@
   .scrollbar-none::-webkit-scrollbar {
     display: none;
   }
+  /* Hoja cuadriculada (fondo del inicio y de los títulos de página) */
+  .bg-grid {
+    background-color: #ffffff;
+    background-image: linear-gradient(rgb(150 170 195 / 0.22) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(150 170 195 / 0.22) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-position: center top;
+  }
   /* Puntitos de cuaderno */
   .bg-dots {
     background-image: radial-gradient(rgb(46 42 39 / 0.09) 1.2px, transparent 1.2px);

@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { Menu, ShoppingBag, X } from "lucide-react";
+import { Menu, Search, ShoppingBag, X } from "lucide-react";
 import { site } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { colorClass } from "@/lib/colors";
 import { useCart } from "@/components/shop/CartProvider";
 import { Logo } from "./Logo";
+import { HeaderSearch } from "./HeaderSearch";
 import { WhatsAppIcon } from "./icons";
 
 const navColors = ["purple", "pink", "green", "yellow", "teal"];
@@ -18,11 +19,15 @@ export function Header() {
   const pathname = usePathname();
   const cart = useCart();
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
-  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    setOpen(false);
+    setSearchOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -67,14 +72,14 @@ export function Header() {
     <button
       type="button"
       onClick={cart.open}
-      className="relative grid h-11 w-11 place-items-center rounded-full border-2 border-tinta/10 bg-white transition-colors hover:border-pink-dark hover:bg-pink-soft"
-      aria-label={cart.count ? `Abrir carrito, ${cart.count} recursos` : "Abrir carrito"}
+      className="relative grid h-11 w-11 place-items-center rounded-full border-2 border-transparent bg-crema transition-colors hover:border-pink-dark hover:bg-pink-soft"
+      aria-label={cart.count ? `Abrir carrito, ${cart.count} productos` : "Abrir carrito"}
     >
       <ShoppingBag className="h-[20px] w-[20px]" strokeWidth={2.2} />
       {cart.ready && cart.count > 0 ? (
         <span
           key={cart.bump}
-          className="absolute -right-1.5 -top-1.5 grid h-[22px] min-w-[22px] animate-pop place-items-center rounded-full border-2 border-crema bg-pink px-1 text-[11px] font-bold tabular-nums text-tinta"
+          className="absolute -right-1.5 -top-1.5 grid h-[22px] min-w-[22px] animate-pop place-items-center rounded-full border-2 border-white bg-pink px-1 text-[11px] font-bold tabular-nums text-tinta"
         >
           {cart.count > 99 ? "99+" : cart.count}
         </span>
@@ -128,7 +133,8 @@ export function Header() {
     <header
       className={cn(
         "sticky top-0 z-40 transition-[background-color,box-shadow] duration-300",
-        scrolled ? "bg-crema/90 shadow-[0_1px_0_theme(colors.linea)] backdrop-blur-md" : "bg-crema"
+        // Blanco, para separarse del crema de la página
+        scrolled ? "bg-white/95 shadow-[0_6px_20px_-12px_rgb(46_42_39/0.25)] backdrop-blur-md" : "bg-white"
       )}
     >
       <div className="container-site flex h-16 items-center justify-between gap-4 lg:h-[76px]">
@@ -137,14 +143,14 @@ export function Header() {
         </Link>
 
         <nav aria-label="Principal" className="hidden md:block">
-          <ul className="flex items-center gap-7 text-[15px] font-medium">
+          <ul className="flex items-center gap-6 text-[15px] font-medium xl:gap-7">
             {site.nav.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
                   onClick={(event) => handleNav(event, item.href)}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  className="link-underline pb-1"
+                  className="link-underline rounded-sm pb-1"
                 >
                   {item.label}
                 </Link>
@@ -154,6 +160,23 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-1.5">
+          {/* Buscador: campo visible en pantallas grandes, lupa en el resto */}
+          <Suspense fallback={<div className="hidden h-11 w-[230px] lg:block" />}>
+            <HeaderSearch className="hidden w-[230px] lg:block xl:w-[270px]" inputClassName="bg-crema border-transparent focus:bg-white" />
+          </Suspense>
+          <button
+            type="button"
+            onClick={() => setSearchOpen((value) => !value)}
+            className={cn(
+              "grid h-11 w-11 place-items-center rounded-full border-2 transition-colors lg:hidden",
+              searchOpen ? "border-purple bg-purple-soft" : "border-transparent bg-crema hover:border-purple"
+            )}
+            aria-label={searchOpen ? "Cerrar buscador" : "Buscar productos"}
+            aria-expanded={searchOpen}
+            aria-controls="buscador-movil"
+          >
+            {searchOpen ? <X className="h-[19px] w-[19px]" /> : <Search className="h-[19px] w-[19px]" strokeWidth={2.2} />}
+          </button>
           {cartButton}
           <button
             type="button"
@@ -166,6 +189,23 @@ export function Header() {
             <Menu className="h-6 w-6" />
           </button>
         </div>
+      </div>
+
+      {searchOpen ? (
+        <div id="buscador-movil" className="container-site animate-fade-in pb-3 lg:hidden">
+          <Suspense fallback={null}>
+            <HeaderSearch autoFocus onSubmitted={() => setSearchOpen(false)} inputClassName="bg-crema border-transparent focus:bg-white" />
+          </Suspense>
+        </div>
+      ) : null}
+
+      {/* Franja con los 5 colores del logo */}
+      <div className="flex h-[4px]" aria-hidden="true">
+        <span className="flex-1 bg-purple" />
+        <span className="flex-1 bg-pink" />
+        <span className="flex-1 bg-green" />
+        <span className="flex-1 bg-yellow" />
+        <span className="flex-1 bg-teal" />
       </div>
 
       {open && mounted ? createPortal(mobileMenu, document.body) : null}

@@ -63,7 +63,7 @@ export function CartDrawer() {
             <h2 id="carrito-titulo" className="title text-[22px]">
               Tu carrito
             </h2>
-            <p className="text-[14px] text-gris">{cart.count ? pluralize(cart.count, "recurso", "recursos") : "Todavía está vacío"}</p>
+            <p className="text-[14px] text-gris">{cart.count ? pluralize(cart.count, "producto", "productos") : "Todavía está vacío"}</p>
           </div>
           <button type="button" onClick={cart.close} className="grid h-11 w-11 place-items-center rounded-full hover:bg-white" aria-label="Cerrar carrito">
             <X className="h-5 w-5" />
@@ -76,9 +76,9 @@ export function CartDrawer() {
               <ShoppingBag className="h-8 w-8 text-pink-ink" />
             </span>
             <p className="mt-5 text-[18px] font-semibold">Tu carrito está vacío</p>
-            <p className="mt-1 text-[15px] text-gris">Elegí los recursos que quieras y armá tu pedido.</p>
-            <Link href="/recursos" onClick={cart.close} className="btn-primary mt-6">
-              Ver recursos
+            <p className="mt-1 text-[15px] text-gris">Elegí los productos que quieras y armá tu pedido.</p>
+            <Link href="/productos" onClick={cart.close} className="btn-primary mt-6">
+              Ver productos
             </Link>
           </div>
         ) : (
@@ -86,14 +86,14 @@ export function CartDrawer() {
             <ul className="flex-1 divide-y-2 divide-linea overflow-y-auto overscroll-contain px-5">
               {cart.items.map((item) => (
                 <li key={item.slug} className="flex gap-4 py-4">
-                  <Link href={`/recursos/${item.slug}`} onClick={cart.close} className="paper relative h-[92px] w-[66px] shrink-0">
+                  <Link href={`/productos/${item.slug}`} onClick={cart.close} className="paper relative h-[92px] w-[66px] shrink-0">
                     {item.image ? <Image src={item.image} alt="" fill sizes="66px" className="object-cover" /> : null}
                   </Link>
                   <div className="flex min-w-0 flex-1 flex-col">
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
                         {item.subcategoryName ? <p className="text-[12px] font-medium text-gris">{item.subcategoryName}</p> : null}
-                        <Link href={`/recursos/${item.slug}`} onClick={cart.close} className="line-clamp-2 text-[15px] font-semibold leading-snug hover:underline">
+                        <Link href={`/productos/${item.slug}`} onClick={cart.close} className="line-clamp-2 text-[15px] font-semibold leading-snug hover:underline">
                           {item.name}
                         </Link>
                       </div>

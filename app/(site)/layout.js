@@ -18,7 +18,7 @@ export default async function SiteLayout({ children }) {
       </a>
       {isDemo ? (
         <p className="bg-tinta px-4 py-1.5 text-center text-[12.5px] text-crema">
-          Vista previa: los recursos que ves son de ejemplo hasta conectar la base de datos.
+          Vista previa: los productos que ves son de ejemplo hasta conectar la base de datos.
         </p>
       ) : null}
       <Header />

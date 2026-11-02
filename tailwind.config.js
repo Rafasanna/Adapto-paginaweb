@@ -64,6 +64,14 @@ module.exports = {
           "0%": { transform: "translateX(100%)" },
           "100%": { transform: "translateX(0)" }
         },
+        sheetUp: {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0)" }
+        },
+        slideInLeft: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(0)" }
+        },
         toastIn: {
           "0%": { opacity: "0", transform: "translate(-50%, 12px)" },
           "100%": { opacity: "1", transform: "translate(-50%, 0)" }
@@ -76,6 +84,8 @@ module.exports = {
         marquee: "marquee 38s linear infinite",
         pop: "pop 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
         "slide-in": "slideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "sheet-up": "sheetUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "slide-in-left": "slideInLeft 0.35s cubic-bezier(0.22, 1, 0.36, 1) both",
         "toast-in": "toastIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both"
       }
     }

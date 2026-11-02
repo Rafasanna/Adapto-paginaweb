@@ -24,7 +24,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const data = await getProduct(slug);
-  if (!data) return { title: "Recurso no encontrado" };
+  if (!data) return { title: "Producto no encontrado" };
   const { product } = data;
   return {
     title: product.name,
@@ -46,15 +46,16 @@ export default async function ProductPage({ params }) {
   const subBySlug = new Map(catalog.subcategories.map((item) => [item.slug, item]));
 
   return (
+    <div className="bg-white pb-24">
     <div className="container-site pt-5 lg:pt-8">
       <nav aria-label="Ruta" className="flex flex-wrap items-center gap-1 text-[14px] text-gris">
-        <Link href="/recursos" className="hover:text-tinta hover:underline">
-          Recursos
+        <Link href="/productos" className="hover:text-tinta hover:underline">
+          Productos
         </Link>
         {category ? (
           <>
             <ChevronRight className="h-3.5 w-3.5" />
-            <Link href={`/recursos?categoria=${category.slug}`} className="hover:text-tinta hover:underline">
+            <Link href={`/productos?categoria=${category.slug}`} className="hover:text-tinta hover:underline">
               {category.name}
             </Link>
           </>
@@ -62,7 +63,7 @@ export default async function ProductPage({ params }) {
         {subcategory ? (
           <>
             <ChevronRight className="h-3.5 w-3.5" />
-            <Link href={`/recursos?tema=${subcategory.slug}`} className="hover:text-tinta hover:underline">
+            <Link href={`/productos?tema=${subcategory.slug}`} className="hover:text-tinta hover:underline">
               {subcategory.name}
             </Link>
           </>
@@ -75,7 +76,7 @@ export default async function ProductPage({ params }) {
         <div className="lg:sticky lg:top-24 lg:self-start">
           {subcategory ? (
             <Link
-              href={`/recursos?tema=${subcategory.slug}`}
+              href={`/productos?tema=${subcategory.slug}`}
               className={cn("inline-flex items-center gap-1.5 rounded-full border-2 py-0.5 pl-1 pr-3 text-[14px] font-semibold", color.soft, color.border)}
             >
               <TopicIcon name={subcategory.icon} color={subcategory.color} className="h-7 w-7" />
@@ -89,19 +90,19 @@ export default async function ProductPage({ params }) {
           <Price price={product.price} compareAtPrice={product.compareAtPrice} size="lg" className="mt-5" />
 
           <dl className="mt-4 flex flex-wrap gap-2 text-[14px]">
-            <div className="flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5">
+            <div className="flex items-center gap-1.5 rounded-full bg-crema px-3 py-1.5">
               <dt className="sr-only">Formato</dt>
               <FileText className="h-4 w-4 text-gris" />
               <dd>{product.format}</dd>
             </div>
             {product.pageCount ? (
-              <div className="flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5">
+              <div className="flex items-center gap-1.5 rounded-full bg-crema px-3 py-1.5">
                 <dt className="sr-only">Páginas</dt>
                 <dd>{pluralize(product.pageCount, "página", "páginas")}</dd>
               </div>
             ) : null}
             {audienceNames.length ? (
-              <div className="flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5">
+              <div className="flex items-center gap-1.5 rounded-full bg-crema px-3 py-1.5">
                 <dt>Para</dt>
                 <dd className="font-medium">{audienceNames.join(" · ")}</dd>
               </div>
@@ -112,12 +113,12 @@ export default async function ProductPage({ params }) {
             <AddToCart product={product} subcategoryName={subcategory?.name} />
           </div>
 
-          <ol className="mt-8 grid gap-3 rounded-[22px] border-2 border-linea bg-papel p-5 text-[15px]">
+          <ol className="mt-8 grid gap-3 rounded-[22px] bg-crema p-5 text-[15px]">
             <li className="flex gap-3">
               <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-pink-soft">
                 <ShoppingBag className="h-4 w-4 text-pink-ink" />
               </span>
-              <span>Sumás al carrito los recursos que quieras, con la cantidad que necesites.</span>
+              <span>Sumás al carrito los productos que quieras, con la cantidad que necesites.</span>
             </li>
             <li className="flex gap-3">
               <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-purple-soft">
@@ -135,7 +136,7 @@ export default async function ProductPage({ params }) {
 
           {product.description ? (
             <section className="mt-8">
-              <h2 className="title text-[20px]">Sobre este recurso</h2>
+              <h2 className="title text-[20px]">Sobre este producto</h2>
               <div className="mt-3 space-y-3 text-[16px] leading-relaxed text-tinta/85">
                 {product.description.split(/\n{2,}/).map((paragraph) => (
                   <p key={paragraph.slice(0, 24)}>{paragraph}</p>
@@ -150,7 +151,7 @@ export default async function ProductPage({ params }) {
             rel="noopener noreferrer"
             className="mt-6 inline-block text-[15px] text-gris underline underline-offset-4 hover:text-tinta"
           >
-            ¿Tenés dudas sobre este recurso? Consultanos
+            ¿Tenés dudas sobre este producto? Consultanos
           </a>
         </div>
       </div>
@@ -161,7 +162,7 @@ export default async function ProductPage({ params }) {
             <h2 id="relacionados" className="title text-[28px]">
               También te puede servir
             </h2>
-            <Link href="/recursos" className="shrink-0 text-[15px] font-semibold underline underline-offset-4">
+            <Link href="/productos" className="shrink-0 text-[15px] font-semibold underline underline-offset-4">
               Ver todos
             </Link>
           </div>
@@ -174,6 +175,7 @@ export default async function ProductPage({ params }) {
           </ul>
         </section>
       ) : null}
+    </div>
     </div>
   );
 }

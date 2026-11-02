@@ -40,7 +40,7 @@ export const site = {
 
   nav: [
     { label: "Inicio", href: "/" },
-    { label: "Recursos", href: "/recursos" },
+    { label: "Productos", href: "/productos" },
     { label: "Nosotras", href: "/nosotras" },
     { label: "Cómo comprar", href: "/#como-comprar" }
   ]

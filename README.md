@@ -17,17 +17,20 @@ El cliente elige recursos, suma unidades al carrito y envía el pedido por Whats
 
 | Ruta | Qué tiene |
 | --- | --- |
-| `/` | Logo + bienvenida, banner de temas, temas con íconos, destacados, cómo comprar, para quién, adelanto de Nosotras, preguntas frecuentes |
-| `/recursos` | Catálogo con filtros: categoría, tema (subcategoría), para quién, búsqueda y orden. Los filtros quedan en la URL (`?tema=escritura&para=ninos`) para poder compartir el link |
-| `/recursos/[slug]` | Detalle: carrusel de páginas, nombre, precio, descripción, cantidad, agregar al carrito, pedir por WhatsApp, relacionados |
+| `/` | Hoja cuadriculada con logo + bienvenida e ilustración de hojas, banner de temas, temas con íconos, destacados, cómo comprar, para quién, adelanto de Nosotras, preguntas frecuentes |
+| `/productos` | Catálogo. Botón "Filtros" que abre un panel (lateral en desktop, hoja desde abajo en mobile) con categoría, tema y para quién; chips de filtros activos y orden. Todo queda en la URL (`?tema=escritura&para=ninos`) para poder compartir el link |
+| `/productos/[slug]` | Detalle: carrusel de páginas, nombre, precio, descripción, cantidad, agregar al carrito, pedir por WhatsApp, relacionados |
+
+El buscador está en el header: en `/productos` filtra mientras escribís; desde otra página, Enter lleva a `/productos?q=...`.
+Los links viejos `/recursos` y `/recursos/[slug]` redirigen a `/productos`.
 | `/nosotras` | Azu y Jaz, con fotos |
 
 ## Estructura
 
 ```text
 app/(site)/                 Páginas públicas (layout con header, footer y carrito)
-components/site/            Header, Footer, Logo, íconos propios (TopicIcon, StepIcon, Doodles)
-components/shop/            Carrito (CartProvider, CartDrawer), ProductCard, PagePreview, Catalog...
+components/site/            Header (con buscador), Footer, Logo, íconos propios (TopicIcon, StepIcon), trazos (Doodles) e ilustración del inicio (HeroSheets)
+components/shop/            Carrito (CartProvider, CartDrawer), ProductCard, PagePreview, Catalog (con panel de filtros)...
 config/site.js              Textos de bienvenida, equipo, WhatsApp, menú
 config/catalog.js           Categorías y subcategorías (con color e ícono)
 data/demo-products.js       Productos de EJEMPLO (solo sin base conectada)
@@ -44,6 +47,8 @@ public/equipo/              Fotos de Azu y Jaz
 - Fondo crema `#F8F3EA` y gris `#737373`, tomados del PDF.
 - Tipografía: **Outfit** (geométrica, de la familia de Codec Pro, la del "Recursos digitales").
 - Íconos propios por tema con el estilo del logo: relleno pastel + contorno del mismo tono.
+- Decoración: solo trazos de línea (ondas, zigzag, rulos, puntos). Sin corazones ni estrellas.
+- Fondos: header blanco con franja de 5 colores; secciones que alternan blanco y crema; hoja cuadriculada (`.bg-grid`) en el inicio y en los títulos de página.
 
 ## Carrito y pedido
 
@@ -89,7 +94,7 @@ Sin `DATABASE_URL` el sitio muestra **productos de ejemplo** y un aviso arriba (
 
 ## Próximos pasos
 
-- Admin en `/admin` (mismo esquema de usuarios y sesiones que Cofi Lab, las tablas ya están en el SQL): ABM de productos, subida de páginas a Cloudinary, orden y destacados.
+- Admin en `/admin` (las tablas de usuarios y sesiones ya están en el SQL): ABM de productos, subida de páginas a Cloudinary, orden y destacados.
 - Generar la vista previa automáticamente a partir del PDF (primeras páginas → imágenes).
 - Descripciones de Azu y Jaz (`config/site.js` → `team[].bio`).
 - Instagram (`config/site.js` → `contact.instagram`).

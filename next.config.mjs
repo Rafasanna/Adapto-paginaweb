@@ -16,8 +16,10 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      { source: "/productos", destination: "/recursos", permanent: true },
-      { source: "/tienda", destination: "/recursos", permanent: true }
+      // Antes la tienda vivía en /recursos: los links viejos siguen funcionando.
+      { source: "/recursos", destination: "/productos", permanent: true },
+      { source: "/recursos/:slug", destination: "/productos/:slug", permanent: true },
+      { source: "/tienda", destination: "/productos", permanent: true }
     ];
   },
   async headers() {

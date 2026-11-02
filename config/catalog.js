@@ -47,7 +47,7 @@ export const subcategories = [
   { slug: "seguimiento-terapeutico", category: "guias", name: "Seguimiento terapéutico", color: "green", icon: "seguimiento", sortOrder: 8 }
 ];
 
-// Para quién es cada recurso (filtro "Para")
+// Para quién es cada producto (filtro "Para")
 export const audiences = [
   { slug: "ninos", name: "Niños" },
   { slug: "adolescentes", name: "Adolescentes" },

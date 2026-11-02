@@ -88,7 +88,6 @@ on conflict (slug) do nothing;
 
 -- ---------------------------------------------------------------------------
 -- Admin (para el panel que viene): usuarios, sesiones y bloqueo de login
--- Mismo esquema que Cofi Lab / Mayma.
 -- ---------------------------------------------------------------------------
 
 create table if not exists admin_users (

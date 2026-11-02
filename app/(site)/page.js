@@ -9,6 +9,7 @@ import { whatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/site/Logo";
 import { Doodle } from "@/components/site/Doodles";
+import { NotebookSheet, TraceSheet } from "@/components/site/HeroSheets";
 import { Reveal } from "@/components/site/Reveal";
 import { StepIcon } from "@/components/site/StepIcon";
 import { TopicIcon } from "@/components/site/TopicIcon";
@@ -21,7 +22,7 @@ const steps = [
   {
     icon: "carrito",
     color: "pink",
-    title: "Elegí tus recursos",
+    title: "Elegí tus productos",
     text: "Filtrá por tema o por edad y sumá al carrito la cantidad que necesites."
   },
   {
@@ -40,7 +41,7 @@ const steps = [
 
 const faqs = [
   {
-    q: "¿Cómo recibo los recursos?",
+    q: "¿Cómo recibo los productos?",
     a: "Una vez confirmado el pago, te enviamos los archivos en PDF por WhatsApp (o por mail, si preferís). No hay envíos físicos: todo es digital."
   },
   {
@@ -53,11 +54,11 @@ const faqs = [
   },
   {
     q: "¿Para qué edades son?",
-    a: "Hay recursos para niños, adolescentes y adultos. En la tienda podés filtrar por edad y en cada recurso indicamos para quién está pensado."
+    a: "Hay productos para niños, adolescentes y adultos. En la tienda podés filtrar por edad y en cada producto indicamos para quién está pensado."
   },
   {
     q: "¿Puedo compartir o revender el material?",
-    a: "No. Los recursos son de uso personal o profesional. Si querés compartirlos con colegas, recomendales ADAPTO 💛"
+    a: "No. Los productos son de uso personal o profesional. Si querés compartirlos con colegas, recomendales ADAPTO 💛"
   }
 ];
 
@@ -77,12 +78,19 @@ export default async function HomePage() {
   return (
     <>
       {/* Bienvenida: logo y, debajo, la descripción */}
-      <section className="bg-dots relative overflow-hidden">
-        <Doodle shape="star" color="yellow" className="absolute left-[5%] top-3 h-10 w-10 animate-float sm:top-10 sm:h-16 sm:w-16" style={{ "--r": "-12deg" }} />
-        <Doodle shape="heart" color="pink" className="absolute right-[5%] top-4 h-9 w-9 animate-float [animation-delay:1.2s] sm:right-[7%] sm:top-16 sm:h-14 sm:w-14" style={{ "--r": "10deg" }} />
-        <Doodle shape="pencil" color="purple" className="absolute bottom-24 left-[4%] hidden h-16 w-16 animate-float [animation-delay:0.6s] md:block" style={{ "--r": "8deg" }} />
-        <Doodle shape="puzzle" color="teal" className="absolute bottom-28 right-[5%] hidden h-16 w-16 animate-float [animation-delay:2s] md:block" style={{ "--r": "-8deg" }} />
-        <Doodle shape="squiggle" color="green" className="absolute right-[18%] top-[46%] hidden h-12 w-16 lg:block" />
+      <section className="bg-grid relative overflow-hidden">
+        {/* Hojas de actividades apoyadas sobre la hoja cuadriculada */}
+        <TraceSheet className="absolute -left-3 top-24 hidden w-[230px] -rotate-[9deg] drop-shadow-sm xl:block 2xl:left-[4%]" />
+        <NotebookSheet className="absolute -right-3 top-[38%] hidden w-[240px] rotate-[7deg] drop-shadow-sm xl:block 2xl:right-[4%]" />
+
+        {/* Trazos sueltos */}
+        <Doodle shape="squiggle" color="pink" className="absolute left-[4%] top-4 hidden h-12 w-14 sm:left-[8%] sm:block sm:top-10 sm:h-16 sm:w-20 xl:left-[17%]" />
+        <Doodle shape="dot" color="teal" className="absolute right-[10%] top-8 h-4 w-4 sm:right-[16%] sm:top-14 xl:right-[22%]" />
+        <Doodle shape="zigzag" color="green" className="absolute right-[3%] top-3 hidden h-12 w-14 sm:right-[7%] sm:block sm:top-24 sm:h-14 sm:w-16 xl:right-[16%] xl:top-[16%]" />
+        <Doodle shape="dot" color="pink" className="absolute left-[12%] top-[42%] hidden h-4 w-4 md:block xl:left-[20%]" />
+        <Doodle shape="curl" color="yellow" className="absolute bottom-16 left-[5%] hidden h-16 w-16 md:block xl:bottom-10 xl:left-[16%]" />
+        <Doodle shape="wave" color="teal" className="absolute bottom-24 right-[6%] hidden h-12 w-16 md:block xl:bottom-12 xl:right-[19%]" />
+        <Doodle shape="dot" color="purple" className="absolute bottom-10 right-[30%] hidden h-3.5 w-3.5 md:block" />
 
         <div className="container-site relative flex flex-col items-center pb-16 pt-14 text-center sm:pb-20 sm:pt-16">
           <h1 className="w-full max-w-[560px] animate-fade-in-up">
@@ -102,8 +110,8 @@ export default async function HomePage() {
           </div>
 
           <div className="mt-8 flex animate-fade-in-up flex-wrap justify-center gap-3 [animation-delay:220ms]">
-            <Link href="/recursos" className="btn-primary px-6 text-[16px]">
-              Ver recursos
+            <Link href="/productos" className="btn-primary px-6 text-[16px]">
+              Ver productos
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link href="/nosotras" className="btn-outline px-6 text-[16px]">
@@ -121,7 +129,7 @@ export default async function HomePage() {
             return (
               <span key={`${label}-${index}`} className="flex items-center gap-3">
                 <span className={cn("whitespace-nowrap rounded-full border-2 px-4 py-1 text-[15px] font-semibold", color.bg, color.border)}>{label}</span>
-                <span className="text-yellow">✦</span>
+                <span className="h-2 w-2 rounded-full bg-crema/40" />
               </span>
             );
           })}
@@ -129,7 +137,7 @@ export default async function HomePage() {
       </div>
 
       {/* Temas */}
-      <section className="container-site pt-20 sm:pt-24" aria-labelledby="temas">
+      <section className="container-site py-20 sm:py-24" aria-labelledby="temas">
         <Reveal className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="eyebrow">Explorá por tema</p>
@@ -137,8 +145,8 @@ export default async function HomePage() {
               ¿Qué querés trabajar hoy?
             </h2>
           </div>
-          <Link href="/recursos" className="inline-flex items-center gap-1.5 text-[15px] font-semibold underline underline-offset-4">
-            Ver todos los recursos
+          <Link href="/productos" className="inline-flex items-center gap-1.5 text-[15px] font-semibold underline underline-offset-4">
+            Ver todos los productos
             <ArrowRight className="h-4 w-4" />
           </Link>
         </Reveal>
@@ -150,7 +158,7 @@ export default async function HomePage() {
             return (
               <Reveal as="li" key={topic.slug} delay={index * 40} className="flex">
                 <Link
-                  href={`/recursos?tema=${topic.slug}`}
+                  href={`/productos?tema=${topic.slug}`}
                   className={cn(
                     "group flex w-full flex-col rounded-[24px] border-2 p-4 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 sm:p-5",
                     color.soft,
@@ -163,7 +171,7 @@ export default async function HomePage() {
                   <span className="mt-4 text-[16.5px] font-semibold leading-tight text-tinta sm:text-[18px]">{topic.longName || topic.name}</span>
                   {topic.detail ? <span className="mt-1 text-[13px] leading-snug text-tinta/65">{topic.detail}</span> : null}
                   <span className="mt-auto flex items-center justify-between pt-4 text-[13px] font-semibold">
-                    {count ? pluralize(count, "recurso", "recursos") : "Muy pronto"}
+                    {count ? pluralize(count, "producto", "productos") : "Muy pronto"}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </Link>
@@ -174,15 +182,16 @@ export default async function HomePage() {
       </section>
 
       {/* Productos */}
-      <section className="container-site pt-24" aria-labelledby="destacados">
+      <section className="bg-white py-20 sm:py-24" aria-labelledby="destacados">
+        <div className="container-site">
         <Reveal className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="eyebrow">La tienda</p>
             <h2 id="destacados" className="title mt-2 text-[34px] sm:text-[44px]">
-              Recursos destacados
+              Productos destacados
             </h2>
           </div>
-          <Link href="/recursos" className="inline-flex items-center gap-1.5 text-[15px] font-semibold underline underline-offset-4">
+          <Link href="/productos" className="inline-flex items-center gap-1.5 text-[15px] font-semibold underline underline-offset-4">
             Ver la tienda
             <ArrowRight className="h-4 w-4" />
           </Link>
@@ -197,15 +206,16 @@ export default async function HomePage() {
             ))}
           </ul>
         ) : (
-          <div className="mt-8 rounded-[28px] border-2 border-dashed border-linea bg-papel px-6 py-14 text-center">
-            <p className="title text-[22px]">Estamos preparando los primeros recursos</p>
+          <div className="mt-8 rounded-[28px] border-2 border-dashed border-linea bg-crema px-6 py-14 text-center">
+            <p className="title text-[22px]">Estamos preparando los primeros productos</p>
             <p className="mt-2 text-gris">Muy pronto vas a encontrarlos acá.</p>
           </div>
         )}
+        </div>
       </section>
 
       {/* Cómo comprar */}
-      <section id="como-comprar" className="scroll-mt-20 pt-24" aria-labelledby="como-comprar-titulo">
+      <section id="como-comprar" className="scroll-mt-20 py-20 sm:py-24" aria-labelledby="como-comprar-titulo">
         <div className="container-site">
           <div className="rounded-[32px] bg-white px-5 py-12 sm:px-10 lg:px-14 lg:py-16">
             <Reveal className="mx-auto max-w-xl text-center">
@@ -235,7 +245,7 @@ export default async function HomePage() {
             </ol>
 
             <div className="mt-12 flex justify-center">
-              <Link href="/recursos" className="btn-primary px-6">
+              <Link href="/productos" className="btn-primary px-6">
                 Empezar a elegir
                 <ArrowRight className="h-4 w-4" />
               </Link>
@@ -245,7 +255,8 @@ export default async function HomePage() {
       </section>
 
       {/* Para quién */}
-      <section className="container-site pt-24" aria-labelledby="para-quien">
+      <section className="bg-white py-20 sm:py-24" aria-labelledby="para-quien">
+        <div className="container-site">
         <Reveal className="max-w-2xl">
           <p className="eyebrow">Para quién</p>
           <h2 id="para-quien" className="title mt-2 text-[34px] sm:text-[44px]">
@@ -254,24 +265,25 @@ export default async function HomePage() {
         </Reveal>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           <Reveal className="rounded-[28px] border-2 border-purple-dark bg-purple-soft p-6 sm:p-8">
-            <Doodle shape="puzzle" color="purple" className="h-14 w-14" />
+            <Doodle shape="zigzag" color="purple" className="h-12 w-14" />
             <h3 className="mt-4 text-[24px] font-semibold">Profesionales</h3>
             <p className="mt-2 text-[16px] leading-relaxed text-tinta/75">
               Herramientas para enriquecer tus intervenciones con niños, adolescentes y adultos, listas para imprimir y llevar a la sesión.
             </p>
           </Reveal>
           <Reveal delay={90} className="rounded-[28px] border-2 border-yellow-dark bg-yellow-soft p-6 sm:p-8">
-            <Doodle shape="heart" color="pink" className="h-14 w-14" />
+            <Doodle shape="curl" color="pink" className="h-12 w-12" />
             <h3 className="mt-4 text-[24px] font-semibold">Familias y acompañantes</h3>
             <p className="mt-2 text-[16px] leading-relaxed text-tinta/75">
               Si sos mamá, papá, familiar o acompañante, también vas a encontrar propuestas simples para usar en casa.
             </p>
           </Reveal>
         </div>
+        </div>
       </section>
 
       {/* Nosotras (adelanto) */}
-      <section className="container-site pt-24" aria-labelledby="nosotras-home">
+      <section className="container-site py-20 sm:py-24" aria-labelledby="nosotras-home">
         <div className="grid items-center gap-10 rounded-[32px] bg-teal-soft px-6 py-10 sm:px-10 md:grid-cols-[auto_1fr] lg:gap-16 lg:px-14 lg:py-14">
           <Reveal className="flex justify-center">
             <div className="flex items-start -space-x-6">
@@ -305,8 +317,8 @@ export default async function HomePage() {
       </section>
 
       {/* Preguntas frecuentes */}
-      <section id="preguntas" className="container-site scroll-mt-20 pt-24" aria-labelledby="preguntas-titulo">
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.6fr] lg:gap-14">
+      <section id="preguntas" className="scroll-mt-20 bg-white py-20 sm:py-24" aria-labelledby="preguntas-titulo">
+        <div className="container-site grid gap-8 lg:grid-cols-[1fr_1.6fr] lg:gap-14">
           <Reveal>
             <p className="eyebrow">Dudas</p>
             <h2 id="preguntas-titulo" className="title mt-2 text-[34px] sm:text-[44px]">
@@ -324,7 +336,7 @@ export default async function HomePage() {
                 <details key={item.q} className="group py-1 [&_summary::-webkit-details-marker]:hidden">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[17px] font-semibold">
                     {item.q}
-                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white transition-transform duration-200 group-open:rotate-45">
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-crema transition-transform duration-200 group-open:rotate-45">
                       <Plus className="h-4 w-4" />
                     </span>
                   </summary>

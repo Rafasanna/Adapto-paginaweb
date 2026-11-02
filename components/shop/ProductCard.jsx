@@ -13,7 +13,7 @@ import { toCartItem, useCart } from "./CartProvider";
 export function ProductCard({ product, subcategory, index = 0, priority = false }) {
   const { addItem } = useCart();
   const color = colorClass(subcategory?.color || "purple");
-  const href = `/recursos/${product.slug}`;
+  const href = `/productos/${product.slug}`;
 
   return (
     <article className="group relative flex w-full flex-col">
