@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Sistema visual de ADAPTO
+   La firma del logo: letras con relleno pastel y un borde del mismo tono, más oscuro.
+   Esa idea se repite en botones, chips, íconos y bloques de color ("sticker"). */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-crema font-sans text-[16px] leading-[1.6] text-tinta antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-tinta;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    @apply bg-yellow text-tinta;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-purple-dark;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-4 sm:px-8 lg:px-10;
+  }
+
+  .title {
+    @apply font-display font-bold leading-[1.05] tracking-[-0.02em];
+  }
+
+  .eyebrow {
+    @apply text-[13px] font-semibold uppercase tracking-[0.12em] text-gris;
+  }
+
+  /* Botones en píldora con el borde del logo */
+  .btn {
+    @apply inline-flex min-h-[46px] items-center justify-center gap-2 rounded-full border-2 px-5 text-[15px] font-semibold transition-[transform,background-color,border-color,box-shadow] duration-200 ease-out active:translate-y-px disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn border-pink-dark bg-pink text-tinta hover:-translate-y-0.5 hover:shadow-[0_3px_0_theme(colors.pink.dark)];
+  }
+  .btn-whatsapp {
+    @apply btn border-green-dark bg-green text-tinta hover:-translate-y-0.5 hover:shadow-[0_3px_0_theme(colors.green.dark)];
+  }
+  .btn-ink {
+    @apply btn border-tinta bg-tinta text-crema hover:-translate-y-0.5 hover:bg-[#45403b];
+  }
+  .btn-outline {
+    @apply btn border-tinta/80 bg-transparent text-tinta hover:-translate-y-0.5 hover:bg-papel;
+  }
+
+  /* Chip de filtro / etiqueta */
+  .chip {
+    @apply inline-flex min-h-[38px] shrink-0 items-center gap-1.5 rounded-full border-2 px-3.5 text-[14px] font-medium transition-colors duration-150;
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.25s ease;
+  }
+  .link-underline:hover,
+  .link-underline[aria-current="page"] {
+    background-size: 100% 2px;
+  }
+
+  /* Hoja de papel: así se muestran las páginas de cada recurso */
+  .paper {
+    @apply overflow-hidden rounded-[6px] bg-white shadow-paper ring-1 ring-black/5;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  /* Puntitos de cuaderno */
+  .bg-dots {
+    background-image: radial-gradient(rgb(46 42 39 / 0.09) 1.2px, transparent 1.2px);
+    background-size: 22px 22px;
+  }
+}
+
+/* Aparición suave al hacer scroll (ver components/site/Reveal.jsx) */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Transición entre páginas */
+.page-enter {
+  animation: pageIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
