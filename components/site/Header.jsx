@@ -197,8 +197,14 @@ export function Header() {
         </div>
       ) : null}
 
-      {/* Línea en el verde agua de la "T" y la "O" */}
-      <div className="h-[3px] bg-teal" aria-hidden="true" />
+      {/* Franja con los 5 colores del logo */}
+      <div className="flex h-[4px]" aria-hidden="true">
+        <span className="flex-1 bg-purple" />
+        <span className="flex-1 bg-pink" />
+        <span className="flex-1 bg-green" />
+        <span className="flex-1 bg-yellow" />
+        <span className="flex-1 bg-teal" />
+      </div>
 
       {open && mounted ? createPortal(mobileMenu, document.body) : null}
     </header>

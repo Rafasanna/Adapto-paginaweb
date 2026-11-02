@@ -44,7 +44,7 @@ public/equipo/              Fotos de Azu y Jaz
 ## Identidad
 
 - Interfaz sobria: blanco y crema `#F8F3EA`, con el verde agua de la "T" y la "O" como color principal (botones, etiquetas, detalles). Ver `teal` en `tailwind.config.js`.
-- Los otros colores del logo (violeta, rosa, verde, amarillo) aparecen solo en el logo, en los íconos de cada tema y en la franja del footer.
+- Los otros colores del logo (violeta, rosa, verde, amarillo) aparecen solo en el logo, en los íconos de cada tema y en las franjas del header y del footer.
 - Tipografía: **Outfit** (geométrica, de la familia de Codec Pro, la del "Recursos digitales").
 - Sin emojis ni dibujitos decorativos: la página no tiene que verse aniñada.
 - Hoja cuadriculada (`.bg-grid`) en el inicio y en los títulos de página.

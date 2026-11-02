@@ -30,7 +30,7 @@ export function Footer() {
           <div className="mt-5 flex flex-wrap gap-2">
             <a href={whatsappUrl(site.contact.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="btn-whatsapp min-h-[42px] px-4 text-[14px]">
               <WhatsAppIcon className="h-4 w-4" />
-              {site.contact.whatsappLabel}
+              WhatsApp
             </a>
             {site.contact.instagram.url ? (
               <a href={site.contact.instagram.url} target="_blank" rel="noopener noreferrer" className="btn-outline min-h-[42px] px-4 text-[14px]">
