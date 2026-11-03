@@ -45,7 +45,7 @@ const faqs = [
   },
   {
     q: "¿Cómo pago?",
-    a: "Cuando nos llega tu pedido por WhatsApp te pasamos las formas de pago disponibles y el total a abonar."
+    a: "Cuando nos envíes por WhatsApp el detalle de tu compra, con el total calculado automáticamente desde el carrito, te compartiremos los datos para realizar el pago."
   },
   {
     q: "¿Puedo imprimirlos más de una vez?",
