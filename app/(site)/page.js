@@ -208,9 +208,10 @@ export default async function HomePage() {
               <span className="absolute left-[16%] right-[16%] top-11 hidden border-t-[3px] border-dashed border-linea md:block" aria-hidden="true" />
               {steps.map((step, index) => {
                 return (
-                  <Reveal as="li" key={step.title} delay={index * 90} className="relative flex flex-col items-center text-center">
-                    <span className="relative grid h-[88px] w-[88px] place-items-center rounded-full border-2 border-linea bg-white">
-                      <StepIcon name={step.icon} color={step.color} className="h-14 w-14" />
+                  <Reveal as="li" key={step.title} delay={index * 90} className="group relative flex flex-col items-center text-center">
+                    {/* Hover / toque: el círculo se marca y el ícono saluda como el logo */}
+                    <span className="relative grid h-[88px] w-[88px] place-items-center rounded-full border-2 border-linea bg-white transition-colors duration-300 group-hover:border-teal group-active:border-teal">
+                      <StepIcon name={step.icon} color={step.color} className="h-14 w-14 group-hover:animate-logo-hello group-active:animate-logo-hello" />
                       <span className="absolute -right-1 -top-1 grid h-8 w-8 place-items-center rounded-full bg-teal-deep text-[14px] font-bold text-white">
                         {index + 1}
                       </span>
