@@ -74,6 +74,12 @@ module.exports = {
           "0%": { transform: "translateX(-100%)" },
           "100%": { transform: "translateX(0)" }
         },
+        logoHello: {
+          "0%": { transform: "rotate(0deg) scale(1)" },
+          "30%": { transform: "rotate(-4deg) scale(1.07)" },
+          "60%": { transform: "rotate(2.5deg) scale(1.07)" },
+          "100%": { transform: "rotate(0deg) scale(1.06)" }
+        },
         toastIn: {
           "0%": { opacity: "0", transform: "translate(-50%, 12px)" },
           "100%": { opacity: "1", transform: "translate(-50%, 0)" }
@@ -88,6 +94,7 @@ module.exports = {
         "slide-in": "slideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both",
         "sheet-up": "sheetUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both",
         "slide-in-left": "slideInLeft 0.35s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "logo-hello": "logoHello 0.55s cubic-bezier(0.22, 1, 0.36, 1) both",
         "toast-in": "toastIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both"
       }
     }

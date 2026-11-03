@@ -136,8 +136,14 @@ export function Header() {
       )}
     >
       <div className="container-site flex h-16 items-center justify-between gap-4 lg:h-[76px]">
-        <Link href="/" onClick={(event) => handleNav(event, "/")} aria-label="ADAPTO, ir al inicio" className="shrink-0">
-          <Logo variant="letters" priority className="h-auto w-[112px] lg:w-[132px]" alt="ADAPTO" />
+        {/* Hover: el logo crece un poco y se balancea, como saludando */}
+        <Link href="/" onClick={(event) => handleNav(event, "/")} aria-label="ADAPTO, ir al inicio" className="group shrink-0 rounded-md">
+          <Logo
+            variant="letters"
+            priority
+            className="h-auto w-[112px] origin-center transition-transform duration-300 ease-out group-hover:animate-logo-hello group-focus-visible:animate-logo-hello lg:w-[132px]"
+            alt="ADAPTO"
+          />
         </Link>
 
         <nav aria-label="Principal" className="hidden md:block">
