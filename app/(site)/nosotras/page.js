@@ -2,9 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Layers, Printer, Users } from "lucide-react";
 import { site } from "@/config/site";
+import { getSiteContent } from "@/lib/server/settings";
 import { whatsappUrl } from "@/lib/whatsapp";
 import { Reveal } from "@/components/site/Reveal";
 import { WhatsAppIcon } from "@/components/site/icons";
+
+export const revalidate = 300;
 
 export const metadata = {
   title: "Nosotras",
@@ -29,7 +32,8 @@ const values = [
   }
 ];
 
-export default function NosotrasPage() {
+export default async function NosotrasPage() {
+  const content = await getSiteContent();
   return (
     <>
       <section className="bg-grid relative overflow-hidden border-b-2 border-linea">
@@ -43,7 +47,7 @@ export default function NosotrasPage() {
 
       <section className="container-site py-16 sm:py-20" aria-label="Equipo">
         <ul className="grid gap-6 sm:grid-cols-2 lg:gap-10">
-          {site.team.map((person, index) => {
+          {content.team.map((person, index) => {
             return (
               <Reveal as="li" key={person.name} delay={index * 100} className="rounded-[32px] bg-white p-6 sm:p-8">
                 <div className="relative mx-auto w-full max-w-[260px] sm:max-w-[300px]">

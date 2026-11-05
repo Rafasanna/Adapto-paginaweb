@@ -27,3 +27,6 @@ next-env.d.ts
 
 # archivos de macOS
 ._*
+
+# worker de pdf.js (se copia solo al instalar/compilar)
+/public/pdf.worker.min.mjs

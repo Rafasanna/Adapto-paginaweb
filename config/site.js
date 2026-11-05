@@ -14,6 +14,7 @@ export const site = {
   },
 
   // Inicio: debajo del logo va primero "closing" (la bienvenida) y después "who".
+  // Se pueden editar desde el admin (/admin/sitio); estos son los textos de respaldo.
   welcome: {
     who: "Somos Azu y Jaz, Licenciadas en Terapia Ocupacional.",
     hello: "¡Hola! Somos Azu y Jaz, Licenciadas en Terapia Ocupacional.",
@@ -24,10 +25,11 @@ export const site = {
     closing: "¡Bienvenidos a ADAPTO! Un espacio para aprender, crear y encontrar recursos que acompañen cada etapa de la vida."
   },
 
-  // Equipo. Las descripciones van cuando las tengan (vacío = no se muestra).
+  // Equipo. Las fotos se pueden cambiar desde el admin (/admin/sitio); estas son las de respaldo.
+  // Las descripciones van cuando las tengan (vacío = no se muestra).
   team: [
-    { name: "Azu", role: "Lic. en Terapia Ocupacional", photo: "/equipo/integrante-1.webp", bio: "" },
-    { name: "Jaz", role: "Lic. en Terapia Ocupacional", photo: "/equipo/integrante-2.webp", bio: "" }
+    { id: "azu", name: "Azu", role: "Lic. en Terapia Ocupacional", photo: "/equipo/integrante-1.webp", bio: "" },
+    { id: "jaz", name: "Jaz", role: "Lic. en Terapia Ocupacional", photo: "/equipo/integrante-2.webp", bio: "" }
   ],
 
   contact: {

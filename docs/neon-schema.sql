@@ -87,6 +87,19 @@ join categories c on c.slug = s.category_slug
 on conflict (slug) do nothing;
 
 -- ---------------------------------------------------------------------------
+-- Ajustes del sitio editables desde el admin
+--   home → { "welcome": "...", "who": "..." }  (frase del banner de inicio)
+--   team → { "azu": "https://res.cloudinary.com/...", "jaz": "..." }  (fotos de Nosotras)
+-- Si una clave no existe, el sitio usa los valores de config/site.js.
+-- ---------------------------------------------------------------------------
+
+create table if not exists site_settings (
+  key text primary key,
+  value jsonb not null default '{}'::jsonb,
+  updated_at timestamptz not null default now()
+);
+
+-- ---------------------------------------------------------------------------
 -- Admin (para el panel que viene): usuarios, sesiones y bloqueo de login
 -- ---------------------------------------------------------------------------
 

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, ClipboardList, House, Plus } from "lucide-react";
 import { site } from "@/config/site";
 import { getCatalog } from "@/lib/server/catalog";
+import { getSiteContent } from "@/lib/server/settings";
 import { colorClass } from "@/lib/colors";
 import { pluralize } from "@/lib/format";
 import { whatsappUrl } from "@/lib/whatsapp";
@@ -64,7 +65,7 @@ const faqs = [
 const marquee = ["Escritura", "Motricidad fina", "Rutinas", "Emociones", "Vida diaria", "Manejo del dinero", "Estimulación cognitiva", "Seguimiento"];
 
 export default async function HomePage() {
-  const { subcategories, products } = await getCatalog();
+  const [{ subcategories, products }, content] = await Promise.all([getCatalog(), getSiteContent()]);
   const subBySlug = new Map(subcategories.map((item) => [item.slug, item]));
   const countByTopic = new Map();
   for (const product of products) countByTopic.set(product.subcategory, (countByTopic.get(product.subcategory) || 0) + 1);
@@ -89,8 +90,8 @@ export default async function HomePage() {
 
           {/* Debajo del logo: primero la bienvenida y después quiénes somos */}
           <div className="mt-9 max-w-[620px] animate-fade-in-up [animation-delay:120ms]">
-            <p className="text-[21px] font-semibold leading-snug sm:text-[25px]">{site.welcome.closing}</p>
-            <p className="mt-4 text-[17px] leading-relaxed text-teal-ink sm:text-[19px]">{site.welcome.who}</p>
+            <p className="text-[21px] font-semibold leading-snug sm:text-[25px]">{content.welcome}</p>
+            <p className="mt-4 text-[17px] leading-relaxed text-teal-ink sm:text-[19px]">{content.who}</p>
           </div>
 
           <div className="mt-8 flex animate-fade-in-up flex-wrap justify-center gap-3 [animation-delay:220ms]">
@@ -270,7 +271,7 @@ export default async function HomePage() {
         <div className="grid items-center gap-10 rounded-[32px] bg-teal-soft px-6 py-10 sm:px-10 md:grid-cols-[auto_1fr] lg:gap-16 lg:px-14 lg:py-14">
           <Reveal className="flex justify-center">
             <div className="flex items-start -space-x-6">
-              {site.team.map((person, index) => {
+              {content.team.map((person, index) => {
                 return (
                   <div key={person.name} className={cn("relative rounded-full border-[3px] border-teal bg-white p-1", index === 1 && "mt-10")}>
                     <Image src={person.photo} alt={`${person.name}, ${person.role}`} width={170} height={170} className="h-32 w-32 rounded-full object-cover sm:h-40 sm:w-40" />

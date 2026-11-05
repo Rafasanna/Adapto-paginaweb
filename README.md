@@ -92,9 +92,27 @@ Sin `DATABASE_URL` el sitio muestra **productos de ejemplo** y un aviso arriba (
    - `audiences`: `{ninos,adolescentes,adultos}`
    - `page_count`, `featured`, `visible`, `sort_order`
 
+## Admin
+
+Panel en `/admin` para que Azu y Jaz carguen y editen productos.
+
+- **Ingreso:** email y contraseña. Contraseñas con bcrypt, sesión de 8 h guardada en la base (solo el hash del token) y cookie `httpOnly` firmada con `AUTH_SECRET`. Después de 5 intentos fallidos por email (o 20 por IP) se bloquea 15 minutos.
+- **Productos:** crear, editar, ocultar/mostrar, destacar y borrar. Toda la validación se hace en el servidor (`lib/server/products.js`). Al guardar, la tienda se actualiza sola.
+- **Vista previa desde el PDF:** se elige el PDF, se marcan las páginas a mostrar y se generan en el navegador con pdf.js, con marca de agua "ADAPTO · vista previa". **El PDF nunca se sube:** a Cloudinary solo van esas imágenes (carpeta `adapto/productos`). La API solo acepta imágenes de esa carpeta de nuestra cuenta.
+- También se pueden subir imágenes sueltas (JPG, PNG, WebP).
+
+### Crear una usuaria
+
+```bash
+npm run create-admin -- email@ejemplo.com "Azu"
+```
+Pide la contraseña dos veces (no se ve al escribir y no queda en el historial). Mínimo 10 caracteres. Si el email ya existe, le cambia la contraseña.
+
+### Variables (en `.env.local` y en Vercel)
+
+`DATABASE_URL`, `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`, `AUTH_SECRET`, `NEXT_PUBLIC_SITE_URL`. Ver `.env.example`.
+
 ## Próximos pasos
 
-- Admin en `/admin` (las tablas de usuarios y sesiones ya están en el SQL): ABM de productos, subida de páginas a Cloudinary, orden y destacados.
-- Generar la vista previa automáticamente a partir del PDF (primeras páginas → imágenes).
 - Descripciones de Azu y Jaz (`config/site.js` → `team[].bio`).
-- Instagram (`config/site.js` → `contact.instagram`).
+- Borrar de Cloudinary las imágenes de un producto borrado (hoy quedan guardadas, no se ven en la tienda).
