@@ -36,7 +36,7 @@ export default async function NosotrasPage() {
   const content = await getSiteContent();
   return (
     <>
-      <section className="bg-grid relative overflow-hidden border-b-2 border-linea">
+      <section className="bg-white relative overflow-hidden border-b-2 border-linea">
         <div className="container-site relative pb-14 pt-10 sm:pt-16">
           <p className="eyebrow">Nosotras</p>
           <h1 className="title mt-2 max-w-3xl text-[42px] sm:text-[60px]">Somos Azu y Jaz</h1>

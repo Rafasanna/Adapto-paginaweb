@@ -13,7 +13,7 @@ export default async function AdminLoginPage() {
   const ready = isDatabaseConfigured() && Boolean(process.env.AUTH_SECRET);
 
   return (
-    <main className="bg-grid grid min-h-screen place-items-center px-4 py-10">
+    <main className="bg-white grid min-h-screen place-items-center px-4 py-10">
       <section className="w-full max-w-[400px] rounded-[28px] bg-white p-6 shadow-paper sm:p-8">
         <Logo variant="letters" className="h-auto w-[130px]" alt="ADAPTO" />
         <h1 className="title mt-6 text-[28px]">Panel de administración</h1>

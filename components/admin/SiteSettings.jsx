@@ -69,7 +69,7 @@ function HomeText({ content, defaults, limits }) {
         </span>
       </label>
       <label className="mt-1 block text-[14px] font-medium">
-        Segunda línea
+        Segunda línea <span className="font-normal text-gris">(opcional: si la dejás vacía, no se muestra)</span>
         <input
           value={form.who}
           onChange={(event) => setForm((current) => ({ ...current, who: event.target.value }))}
@@ -79,10 +79,10 @@ function HomeText({ content, defaults, limits }) {
       </label>
 
       {/* Vista previa con el mismo estilo que el inicio */}
-      <div className="bg-grid mt-5 rounded-2xl border-2 border-linea px-4 py-6 text-center">
+      <div className="bg-white mt-5 rounded-2xl border-2 border-linea px-4 py-6 text-center">
         <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-gris">Así se ve</p>
         <p className="mx-auto mt-3 max-w-[460px] text-[19px] font-semibold leading-snug">{form.welcome || "…"}</p>
-        <p className="mt-2 text-[15px] text-teal-ink">{form.who || "…"}</p>
+        {form.who.trim() ? <p className="mt-2 text-[15px] text-teal-ink">{form.who}</p> : null}
       </div>
 
       <div className="mt-5 flex flex-wrap items-center gap-2">

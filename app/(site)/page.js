@@ -9,7 +9,6 @@ import { pluralize } from "@/lib/format";
 import { whatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/site/Logo";
-import { NotebookSheet, TraceSheet } from "@/components/site/HeroSheets";
 import { Reveal } from "@/components/site/Reveal";
 import { StepIcon } from "@/components/site/StepIcon";
 import { TopicIcon } from "@/components/site/TopicIcon";
@@ -62,6 +61,8 @@ const faqs = [
   }
 ];
 
+// Puntitos de la franja: los 5 colores del logo, en orden
+const marqueeDots = ["bg-purple", "bg-pink", "bg-green", "bg-yellow", "bg-teal"];
 const marquee = ["Escritura", "Motricidad fina", "Rutinas", "Emociones", "Vida diaria", "Manejo del dinero", "Estimulación cognitiva", "Seguimiento"];
 
 export default async function HomePage() {
@@ -77,12 +78,7 @@ export default async function HomePage() {
   return (
     <>
       {/* Bienvenida: logo y, debajo, la descripción */}
-      <section className="bg-grid relative overflow-hidden">
-        {/* Hojas de actividades apoyadas sobre la hoja cuadriculada */}
-        <TraceSheet className="absolute -left-3 top-24 hidden w-[230px] -rotate-[9deg] drop-shadow-sm xl:block 2xl:left-[4%]" />
-        <NotebookSheet className="absolute -right-3 top-[38%] hidden w-[240px] rotate-[7deg] drop-shadow-sm xl:block 2xl:right-[4%]" />
-
-
+      <section className="relative overflow-hidden bg-white">
         <div className="container-site relative flex flex-col items-center pb-16 pt-14 text-center sm:pb-20 sm:pt-16">
           <h1 className="w-full max-w-[560px] animate-fade-in-up">
             <Logo priority className="h-auto w-full" alt="ADAPTO · Recursos digitales" />
@@ -91,7 +87,7 @@ export default async function HomePage() {
           {/* Debajo del logo: primero la bienvenida y después quiénes somos */}
           <div className="mt-9 max-w-[620px] animate-fade-in-up [animation-delay:120ms]">
             <p className="text-[21px] font-semibold leading-snug sm:text-[25px]">{content.welcome}</p>
-            <p className="mt-4 text-[17px] leading-relaxed text-teal-ink sm:text-[19px]">{content.who}</p>
+            {content.who ? <p className="mt-4 text-[17px] leading-relaxed text-teal-ink sm:text-[19px]">{content.who}</p> : null}
           </div>
 
           <div className="mt-8 flex animate-fade-in-up flex-wrap justify-center gap-3 [animation-delay:220ms]">
@@ -113,7 +109,7 @@ export default async function HomePage() {
             return (
               <span key={`${label}-${index}`} className="flex items-center gap-3">
                 <span className="whitespace-nowrap px-2 text-[15px] font-medium text-crema/90">{label}</span>
-                <span className="h-1.5 w-1.5 rounded-full bg-teal" />
+                <span className={cn("h-2 w-2 rounded-full", marqueeDots[index % marqueeDots.length])} />
               </span>
             );
           })}
@@ -213,7 +209,7 @@ export default async function HomePage() {
                     {/* Hover / toque: el círculo se marca y el ícono saluda como el logo */}
                     <span className="relative grid h-[88px] w-[88px] place-items-center rounded-full border-2 border-linea bg-white transition-colors duration-300 group-hover:border-teal group-active:border-teal">
                       <StepIcon name={step.icon} color={step.color} className="h-14 w-14 group-hover:animate-logo-hello group-active:animate-logo-hello" />
-                      <span className="absolute -right-1 -top-1 grid h-8 w-8 place-items-center rounded-full bg-teal-deep text-[14px] font-bold text-white">
+                      <span className="absolute -right-1 -top-1 grid h-8 w-8 place-items-center rounded-full bg-teal-dark text-[14px] font-bold text-tinta">
                         {index + 1}
                       </span>
                     </span>
@@ -275,7 +271,7 @@ export default async function HomePage() {
                 return (
                   <div key={person.name} className={cn("relative rounded-full border-[3px] border-teal bg-white p-1", index === 1 && "mt-10")}>
                     <Image src={person.photo} alt={`${person.name}, ${person.role}`} width={170} height={170} className="h-32 w-32 rounded-full object-cover sm:h-40 sm:w-40" />
-                    <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-teal-deep px-3 py-0.5 text-[14px] font-semibold text-white">
+                    <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-teal-dark px-3 py-0.5 text-[14px] font-semibold text-tinta">
                       {person.name}
                     </span>
                   </div>
@@ -291,7 +287,7 @@ export default async function HomePage() {
             <p className="mt-3 max-w-xl text-[17px] leading-relaxed text-tinta/75">
               Licenciadas en Terapia Ocupacional. Creamos ADAPTO para compartir herramientas, ideas y recursos que acompañen cada etapa de la vida.
             </p>
-            <Link href="/nosotras" className="btn-ink mt-6">
+            <Link href="/nosotras" className="btn-primary mt-6">
               Conocenos
               <ArrowRight className="h-4 w-4" />
             </Link>

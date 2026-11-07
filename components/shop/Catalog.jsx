@@ -113,7 +113,7 @@ export function Catalog({ categories, subcategories, products }) {
           aria-expanded={panelOpen}
           className={cn(
             "chip min-h-[44px] gap-2 px-4 text-[15px] font-semibold",
-            filterCount ? "border-teal-deep bg-teal-deep text-white" : "border-tinta/80 bg-white hover:bg-crema"
+            filterCount ? "border-teal-dark bg-teal text-tinta" : "border-teal-dark bg-white hover:bg-teal-soft"
           )}
         >
           <SlidersHorizontal className="h-4 w-4" strokeWidth={2.4} />
@@ -270,7 +270,7 @@ function FilterPanel({ onClose, categories, subcategories, category, topic, audi
                     type="button"
                     aria-pressed={active}
                     onClick={() => update({ categoria: item.slug, tema: "" })}
-                    className={cn("chip min-h-[42px] px-4 text-[15px] font-semibold", active ? "border-teal-deep bg-teal-deep text-white" : "border-linea bg-white hover:border-tinta/30")}
+                    className={cn("chip min-h-[42px] px-4 text-[15px] font-semibold", active ? "border-teal-dark bg-teal text-tinta" : "border-linea bg-white hover:border-tinta/30")}
                   >
                     {item.name}
                   </button>
@@ -327,7 +327,7 @@ function FilterPanel({ onClose, categories, subcategories, category, topic, audi
                     type="button"
                     aria-pressed={active}
                     onClick={() => update({ para: active ? "" : item.slug })}
-                    className={cn("chip min-h-[42px] px-4 text-[15px]", active ? "border-teal-deep bg-teal-deep text-white" : "border-linea bg-white hover:border-tinta/40")}
+                    className={cn("chip min-h-[42px] px-4 text-[15px]", active ? "border-teal-dark bg-teal text-tinta" : "border-linea bg-white hover:border-tinta/40")}
                   >
                     {item.name}
                   </button>
@@ -346,7 +346,7 @@ function FilterPanel({ onClose, categories, subcategories, category, topic, audi
           >
             Limpiar
           </button>
-          <button type="button" onClick={onClose} className="btn-ink ml-auto flex-1 sm:flex-none sm:px-6">
+          <button type="button" onClick={onClose} className="btn-primary ml-auto flex-1 sm:flex-none sm:px-6">
             Ver {pluralize(resultCount, "producto", "productos")}
           </button>
         </footer>

@@ -134,7 +134,7 @@ export function ProductList({ products }) {
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-1.5">
                         {!product.visible ? <span className="rounded-full bg-crema px-2 py-0.5 text-[12px] font-semibold text-gris">Oculto</span> : null}
-                        {product.featured ? <span className="rounded-full bg-teal-deep px-2 py-0.5 text-[12px] font-semibold text-white">Destacado</span> : null}
+                        {product.featured ? <span className="rounded-full bg-teal-dark px-2 py-0.5 text-[12px] font-semibold text-tinta">Destacado</span> : null}
                         <span className="text-[13px] text-gris">{product.subcategoryName || product.categoryName}</span>
                       </div>
                       <Link href={`/admin/productos/${product.id}`} className="mt-0.5 block text-[16px] font-semibold leading-snug hover:underline sm:text-[17px]">

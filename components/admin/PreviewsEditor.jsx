@@ -126,7 +126,7 @@ export function PreviewsEditor({ previews, onChange, onPdfInfo, disabled }) {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={item.url} alt={`Página ${index + 1}`} className="h-full w-full object-cover" />
                 {index === 0 ? (
-                  <span className="absolute left-1.5 top-1.5 rounded-full bg-teal-deep px-2 py-0.5 text-[11px] font-semibold text-white">Portada</span>
+                  <span className="absolute left-1.5 top-1.5 rounded-full bg-teal-dark px-2 py-0.5 text-[11px] font-semibold text-tinta">Portada</span>
                 ) : null}
               </div>
               <div className="mt-1.5 flex items-center justify-between">
@@ -239,7 +239,7 @@ export function PreviewsEditor({ previews, onChange, onPdfInfo, disabled }) {
                     <img src={thumb.url} alt={`Página ${thumb.page}`} className="block w-full" />
                     <span className="absolute bottom-1 left-1 rounded-full bg-white/90 px-1.5 text-[11px] font-semibold">p. {thumb.page}</span>
                     {active ? (
-                      <span className="absolute right-1 top-1 grid h-6 min-w-6 place-items-center rounded-full bg-teal-deep px-1 text-[11px] font-bold text-white">
+                      <span className="absolute right-1 top-1 grid h-6 min-w-6 place-items-center rounded-full bg-teal-dark px-1 text-[11px] font-bold text-tinta">
                         {order === 0 ? <Check className="h-3.5 w-3.5" strokeWidth={3} /> : order + 1}
                       </span>
                     ) : null}

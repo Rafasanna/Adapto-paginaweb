@@ -78,7 +78,7 @@ export function Header() {
       {cart.ready && cart.count > 0 ? (
         <span
           key={cart.bump}
-          className="absolute -right-1.5 -top-1.5 grid h-[22px] min-w-[22px] animate-pop place-items-center rounded-full border-2 border-white bg-teal-deep px-1 text-[11px] font-bold tabular-nums text-white"
+          className="absolute -right-1.5 -top-1.5 grid h-[22px] min-w-[22px] animate-pop place-items-center rounded-full border-2 border-white bg-teal-dark px-1 text-[11px] font-bold tabular-nums text-tinta"
         >
           {cart.count > 99 ? "99+" : cart.count}
         </span>

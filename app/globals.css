@@ -29,7 +29,7 @@
   }
 
   :focus-visible {
-    @apply outline outline-2 outline-offset-2 outline-teal-deep;
+    @apply outline outline-2 outline-offset-2 outline-teal-ink;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -63,17 +63,15 @@
   .btn {
     @apply inline-flex min-h-[46px] items-center justify-center gap-2 rounded-full border-2 px-5 text-[15px] font-semibold transition-[transform,background-color,border-color,box-shadow] duration-200 ease-out active:translate-y-px disabled:pointer-events-none disabled:opacity-50;
   }
+  /* Principal: como las letras T y O del logo (relleno + contorno) */
   .btn-primary {
-    @apply btn border-teal-deep bg-teal-deep text-white hover:-translate-y-0.5 hover:border-teal-deeper hover:bg-teal-deeper;
+    @apply btn border-teal-dark bg-teal text-tinta hover:-translate-y-0.5 hover:bg-teal-dark;
   }
   .btn-whatsapp {
-    @apply btn border-teal bg-teal-soft text-teal-ink hover:-translate-y-0.5 hover:border-teal-dark hover:bg-teal/40;
-  }
-  .btn-ink {
-    @apply btn border-tinta bg-tinta text-crema hover:-translate-y-0.5 hover:bg-[#45403b];
+    @apply btn-primary;
   }
   .btn-outline {
-    @apply btn border-tinta/80 bg-transparent text-tinta hover:-translate-y-0.5 hover:bg-papel;
+    @apply btn border-teal-dark bg-white text-tinta hover:-translate-y-0.5 hover:bg-teal-soft;
   }
 
   /* Chip de filtro / etiqueta */
@@ -105,19 +103,6 @@
   }
   .scrollbar-none::-webkit-scrollbar {
     display: none;
-  }
-  /* Hoja cuadriculada (fondo del inicio y de los títulos de página) */
-  .bg-grid {
-    background-color: #ffffff;
-    background-image: linear-gradient(rgb(150 170 195 / 0.22) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(150 170 195 / 0.22) 1px, transparent 1px);
-    background-size: 28px 28px;
-    background-position: center top;
-  }
-  /* Puntitos de cuaderno */
-  .bg-dots {
-    background-image: radial-gradient(rgb(46 42 39 / 0.09) 1.2px, transparent 1.2px);
-    background-size: 22px 22px;
   }
 }
 

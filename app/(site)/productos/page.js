@@ -14,7 +14,7 @@ export default async function ProductosPage() {
 
   return (
     <div className="bg-white pb-24">
-      <header className="bg-grid relative overflow-hidden border-b-2 border-linea">
+      <header className="bg-white relative overflow-hidden border-b-2 border-linea">
         <div className="container-site relative py-7 sm:py-10 lg:py-14">
           <p className="eyebrow">Tienda</p>
           <div className="max-w-2xl">

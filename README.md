@@ -43,11 +43,12 @@ public/equipo/              Fotos de Azu y Jaz
 
 ## Identidad
 
-- Interfaz sobria: blanco y crema `#F8F3EA`, con el verde agua de la "T" y la "O" como color principal (botones, etiquetas, detalles). Ver `teal` en `tailwind.config.js`.
-- Los otros colores del logo (violeta, rosa, verde, amarillo) aparecen solo en el logo, en los íconos de cada tema y en las franjas del header y del footer.
+- Fondos: blanco y **tiza** `#F8FAE8` (`crema` en `tailwind.config.js`).
+- Botones y opciones activas: como las letras "T" y "O" del logo, relleno `#9AD7C4` con contorno `#83C0AE` y texto oscuro.
+- Los otros colores del logo (violeta, rosa, verde, amarillo) aparecen en el logo, en los íconos de cada tema, en los puntitos de la franja del inicio y en las franjas del header y del footer.
+- Íconos de línea fina (lucide), sobrios: sirven para niños, adolescentes y adultos.
 - Tipografía: **Outfit** (geométrica, de la familia de Codec Pro, la del "Recursos digitales").
-- Sin emojis ni dibujitos decorativos: la página no tiene que verse aniñada.
-- Hoja cuadriculada (`.bg-grid`) en el inicio y en los títulos de página.
+- Sin emojis, dibujitos ni cuadrículas: el inicio es el logo sobre blanco.
 - Botón fijo de WhatsApp abajo a la derecha (`components/site/WhatsAppFloat.jsx`); el mensaje predeterminado está en `config/site.js` → `contact.whatsappMessage`.
 
 ## Carrito y pedido

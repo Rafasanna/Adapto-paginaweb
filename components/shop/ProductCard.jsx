@@ -20,14 +20,14 @@ export function ProductCard({ product, subcategory, index = 0, priority = false 
           <PagePreview previews={product.previews} name={product.name} offset={index} priority={priority} className="transition-transform duration-300 group-hover:rotate-[-1.5deg]" />
 
           {product.featured ? (
-            <span className="absolute left-3 top-3 rounded-full bg-teal-deep px-2.5 py-0.5 text-[12px] font-semibold text-white">Destacado</span>
+            <span className="absolute left-3 top-3 rounded-full bg-teal-dark px-2.5 py-0.5 text-[12px] font-semibold text-tinta">Destacado</span>
           ) : null}
         </div>
 
         <button
           type="button"
           onClick={() => addItem(toCartItem(product, subcategory?.name))}
-          className="absolute bottom-3 right-3 z-10 grid h-11 w-11 place-items-center rounded-full border-2 border-teal bg-white text-teal-ink shadow-sm transition-[transform,background-color,color] duration-300 hover:bg-teal-deep hover:text-white active:scale-95 group-hover:-translate-y-1"
+          className="absolute bottom-3 right-3 z-10 grid h-11 w-11 place-items-center rounded-full border-2 border-teal bg-white text-teal-ink shadow-sm transition-[transform,background-color,color] duration-300 hover:bg-teal-dark hover:text-tinta active:scale-95 group-hover:-translate-y-1"
           aria-label={`Agregar ${product.name} al carrito`}
         >
           <Plus className="h-5 w-5" strokeWidth={2.6} />

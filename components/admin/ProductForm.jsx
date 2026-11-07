@@ -224,7 +224,7 @@ export function ProductForm({ product, categories, subcategories }) {
                   }}
                   className={cn(
                     "chip min-h-[42px] px-4 text-[15px] font-semibold",
-                    form.categoryId === category.id ? "border-teal-deep bg-teal-deep text-white" : "border-linea bg-white"
+                    form.categoryId === category.id ? "border-teal-dark bg-teal text-tinta" : "border-linea bg-white"
                   )}
                 >
                   {category.name}
@@ -264,7 +264,7 @@ export function ProductForm({ product, categories, subcategories }) {
                     type="button"
                     aria-pressed={active}
                     onClick={() => set("audiences", active ? form.audiences.filter((value) => value !== item.slug) : [...form.audiences, item.slug])}
-                    className={cn("chip min-h-[40px] px-4 text-[15px]", active ? "border-teal-deep bg-teal-deep text-white" : "border-linea bg-white")}
+                    className={cn("chip min-h-[40px] px-4 text-[15px]", active ? "border-teal-dark bg-teal text-tinta" : "border-linea bg-white")}
                   >
                     {item.name}
                   </button>

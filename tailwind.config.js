@@ -2,6 +2,7 @@
 
 // Paleta tomada del logo de ADAPTO (PDF de marca).
 // Color principal de la interfaz: el verde agua de la "T" y la "O" (teal).
+// Botones: relleno #9AD7C4 (teal) con contorno #83C0AE (teal-dark), igual que esas letras.
 // Los otros cuatro quedan para el logo y los íconos de cada tema.
 // Cada color tiene: DEFAULT (relleno de la letra), dark (el borde de la letra),
 // soft (fondo suave) e ink (texto legible sobre ese color).
@@ -10,7 +11,7 @@ const palette = {
   pink: { DEFAULT: "#FF66C4", dark: "#F73AAF", soft: "#FFE8F5", ink: "#9C1C6A" },
   green: { DEFAULT: "#B1D782", dark: "#94A972", soft: "#EEF6E4", ink: "#4D6330" },
   yellow: { DEFAULT: "#FFDE59", dark: "#E9BF1E", soft: "#FFF7D4", ink: "#7A5B00" },
-  teal: { DEFAULT: "#9AD7C4", dark: "#81BFAC", soft: "#E6F5F0", ink: "#2F6B5A", deep: "#2F7A66", deeper: "#255F50" }
+  teal: { DEFAULT: "#9AD7C4", dark: "#83C0AE", soft: "#E6F5F0", ink: "#2F6B5A", deep: "#83C0AE", deeper: "#6FAD9A" }
 };
 
 module.exports = {
@@ -23,11 +24,11 @@ module.exports = {
     extend: {
       colors: {
         ...palette,
-        crema: "#F8F3EA", // fondo del PDF de marca
-        papel: "#FFFDF9",
+        crema: "#F8FAE8", // "tiza": fondo de marca (antes #F8F3EA, tiraba a rosado)
+        papel: "#FDFEF9",
         tinta: "#2E2A27",
         gris: "#737373", // gris de "Recursos digitales"
-        linea: "#E8E0D2"
+        linea: "#E3E7D3"
       },
       fontFamily: {
         sans: ['"Outfit Variable"', "ui-sans-serif", "system-ui", "sans-serif"],

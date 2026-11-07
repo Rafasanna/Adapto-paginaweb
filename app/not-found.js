@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <CartProvider>
       <Header />
-      <main className="bg-grid relative overflow-hidden">
+      <main className="bg-white relative overflow-hidden">
         <div className="container-site relative flex min-h-[60vh] flex-col items-start justify-center py-24">
           <p className="eyebrow">Error 404</p>
           <h1 className="title mt-3 text-[44px] sm:text-[64px]">Esta página no existe</h1>
