@@ -110,6 +110,17 @@ export default async function ProductPage({ params }) {
             <AddToCart product={product} subcategoryName={subcategory?.name} />
           </div>
 
+          {product.description ? (
+            <section className="mt-8">
+              <h2 className="title text-[20px]">Sobre este producto</h2>
+              <div className="mt-3 space-y-3 text-[16px] leading-relaxed text-tinta/85">
+                {product.description.split(/\n{2,}/).map((paragraph) => (
+                  <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
           <ol className="mt-8 grid gap-3 rounded-[22px] bg-crema p-5 text-[15px]">
             <li className="flex gap-3">
               <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-teal-soft">
@@ -130,17 +141,6 @@ export default async function ProductPage({ params }) {
               <span>Te enviamos el PDF y lo imprimís las veces que quieras.</span>
             </li>
           </ol>
-
-          {product.description ? (
-            <section className="mt-8">
-              <h2 className="title text-[20px]">Sobre este producto</h2>
-              <div className="mt-3 space-y-3 text-[16px] leading-relaxed text-tinta/85">
-                {product.description.split(/\n{2,}/).map((paragraph) => (
-                  <p key={paragraph.slice(0, 24)}>{paragraph}</p>
-                ))}
-              </div>
-            </section>
-          ) : null}
 
           <a
             href={whatsappUrl(buildProductQuestion(product))}

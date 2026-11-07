@@ -11,12 +11,11 @@ const DEFAULT_SELECTED = 3;
 
 // Editor de las páginas que se muestran en el carrusel del producto.
 // Camino principal: elegir el PDF → marcar páginas → se dibujan en el navegador con
-// marca de agua y se suben SOLO esas imágenes. El PDF no sale de la compu.
+// se suben SOLO esas imágenes. El PDF no sale de la compu.
 export function PreviewsEditor({ previews, onChange, onPdfInfo, disabled }) {
   const [pdf, setPdf] = useState(null); // { doc, name, numPages }
   const [thumbs, setThumbs] = useState([]); // [{ page, url }]
   const [selected, setSelected] = useState([]);
-  const [watermark, setWatermark] = useState(true);
   const [status, setStatus] = useState(null); // { type: "working" | "error", text }
   const pdfInput = useRef(null);
   const imageInput = useRef(null);
@@ -70,7 +69,7 @@ export function PreviewsEditor({ previews, onChange, onPdfInfo, disabled }) {
       const files = [];
       for (const [index, page] of selected.entries()) {
         setStatus({ type: "working", text: `Generando página ${index + 1} de ${selected.length}…` });
-        files.push(await renderPreviewFile(pdf.doc, page, { watermark, name: slugish(pdf.name) }));
+        files.push(await renderPreviewFile(pdf.doc, page, { name: slugish(pdf.name) }));
       }
       const uploaded = await uploadImages(files, {
         optimize: false,
@@ -249,13 +248,6 @@ export function PreviewsEditor({ previews, onChange, onPdfInfo, disabled }) {
             })}
           </ul>
 
-          <label className="mt-4 flex items-start gap-2.5 text-[14px]">
-            <input type="checkbox" checked={watermark} onChange={(event) => setWatermark(event.target.checked)} className="mt-0.5 h-4 w-4 accent-[#2F7A66]" />
-            <span>
-              <strong className="font-semibold">Marca de agua “ADAPTO · vista previa”</strong>
-              <span className="block text-gris">Recomendado: se ve la hoja, pero no sirve para imprimirla.</span>
-            </span>
-          </label>
 
           <div className="mt-4 flex flex-wrap items-center gap-2">
             <button type="button" onClick={uploadSelected} disabled={!selected.length || working} className="btn-primary min-h-[44px] text-[15px]">

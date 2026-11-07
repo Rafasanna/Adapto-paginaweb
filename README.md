@@ -99,7 +99,7 @@ Panel en `/admin` para que Azu y Jaz carguen y editen productos.
 
 - **Ingreso:** email y contraseña. Contraseñas con bcrypt, sesión de 8 h guardada en la base (solo el hash del token) y cookie `httpOnly` firmada con `AUTH_SECRET`. Después de 5 intentos fallidos por email (o 20 por IP) se bloquea 15 minutos.
 - **Productos:** crear, editar, ocultar/mostrar, destacar y borrar. Toda la validación se hace en el servidor (`lib/server/products.js`). Al guardar, la tienda se actualiza sola.
-- **Vista previa desde el PDF:** se elige el PDF, se marcan las páginas a mostrar y se generan en el navegador con pdf.js, con marca de agua "ADAPTO · vista previa". **El PDF nunca se sube:** a Cloudinary solo van esas imágenes (carpeta `adapto/productos`). La API solo acepta imágenes de esa carpeta de nuestra cuenta.
+- **Vista previa desde el PDF:** se elige el PDF, se marcan las páginas a mostrar y se generan en el navegador con pdf.js (1000 px de ancho). **El PDF nunca se sube:** a Cloudinary solo van esas imágenes (carpeta `adapto/productos`). La API solo acepta imágenes de esa carpeta de nuestra cuenta.
 - También se pueden subir imágenes sueltas (JPG, PNG, WebP).
 
 ### Crear una usuaria
