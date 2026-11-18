@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import { ShoppingBag, Trash2, X } from "lucide-react";
 import { formatPrice, pluralize } from "@/lib/format";
 import { buildOrderMessage, whatsappUrl } from "@/lib/whatsapp";
+import { PROMO_BUNDLES, promoLabel } from "@/lib/promo";
 import { WhatsAppIcon } from "@/components/site/icons";
 import { useCart } from "./CartProvider";
 import { QuantityStepper } from "./QuantityStepper";
@@ -40,7 +41,9 @@ export function CartDrawer() {
 
   if (!mounted || !cart.isOpen) return null;
 
-  const message = buildOrderMessage(cart.items, { customerName: name });
+  const message = buildOrderMessage(cart.items, { customerName: name, promo: cart.promo });
+  const bundle = cart.promo?.type === "bundle" ? PROMO_BUNDLES.find((item) => item.id === cart.promo.bundle) : null;
+  const missingForBundle = bundle && cart.count % bundle.take !== 0 ? bundle.take - (cart.count % bundle.take) : 0;
 
   return createPortal(
     <div className="fixed inset-0 z-[60]">
@@ -125,6 +128,23 @@ export function CartDrawer() {
             </ul>
 
             <footer className="border-t-2 border-linea bg-papel px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4">
+              {cart.discount > 0 ? (
+                <div className="mb-1.5 space-y-0.5 text-[14px]">
+                  <div className="flex justify-between text-gris">
+                    <span>Subtotal</span>
+                    <span className="tabular-nums">{formatPrice(cart.subtotal)}</span>
+                  </div>
+                  <div className="flex justify-between font-semibold text-teal-ink">
+                    <span>Promo {promoLabel(cart.promo)}</span>
+                    <span className="tabular-nums">-{formatPrice(cart.discount)}</span>
+                  </div>
+                </div>
+              ) : null}
+              {missingForBundle ? (
+                <p className="mb-2 rounded-xl bg-teal-soft px-3 py-2 text-[13px] leading-snug text-teal-ink">
+                  <span className="font-bold">Promo {bundle.id}:</span> sumá {missingForBundle === 1 ? "1 producto más" : `${missingForBundle} productos más`} y el de menor valor sale gratis.
+                </p>
+              ) : null}
               <div className="flex items-baseline justify-between">
                 <span className="text-[15px] font-medium">Total</span>
                 <span className="title text-[26px] tabular-nums">{formatPrice(cart.total)}</span>

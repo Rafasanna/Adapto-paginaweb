@@ -5,6 +5,8 @@ import { useRef, useState } from "react";
 import { Camera, Check, ImagePlus, Loader2, RotateCcw, Trash2 } from "lucide-react";
 import { uploadImages } from "@/lib/client/uploadImages";
 import { ANNOUNCEMENT_COLORS, HERO_VEILS, isHexColor, textColorFor, veilClass } from "@/lib/banner";
+import { formatPrice } from "@/lib/format";
+import { applyPromo, PROMO_BUNDLES, PROMO_PERCENT, promoDescription, promoLabel } from "@/lib/promo";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/site/Logo";
 
@@ -22,9 +24,10 @@ async function saveSettings(body) {
 export function SiteSettings({ content, defaults, limits }) {
   return (
     <div>
-      <h1 className="title text-[32px] sm:text-[38px]">Inicio y Nosotras</h1>
+      <h1 className="title text-[32px] sm:text-[38px]">Página y promos</h1>
       <p className="mt-1 text-[15px] text-gris">Los cambios se ven en la página apenas guardás.</p>
       <div className="mt-6 grid gap-5 lg:grid-cols-2 lg:items-start">
+        <PromoSettings promo={content.promo} />
         <AnnouncementSettings announcement={content.announcement} limit={limits.announcement} />
         <HeroBackground hero={content.hero} welcome={content.welcome} />
         <HomeText content={content} defaults={defaults} limits={limits} />
@@ -35,6 +38,158 @@ export function SiteSettings({ content, defaults, limits }) {
 }
 
 const fieldClass = "mt-1.5 w-full rounded-xl border-2 border-linea bg-white px-3.5 text-[16px] outline-none transition-colors focus:border-teal-deep";
+
+// Promoción para toda la tienda: 2x1/3x2/4x3 o un % de descuento en todo.
+const PROMO_TYPES = [
+  { id: "none", label: "Sin promo" },
+  { id: "bundle", label: "2x1 / 3x2" },
+  { id: "percent", label: "% de descuento" }
+];
+const QUICK_PERCENTS = [10, 20, 25, 30, 50];
+const SAMPLE_PRICES = [5000, 4000, 3000, 2500];
+
+function PromoSettings({ promo }) {
+  const router = useRouter();
+  const [form, setForm] = useState({ ...promo, percent: String(promo.percent) });
+  const [state, setState] = useState(null);
+  const percent = Number(form.percent);
+  const percentValid = Number.isInteger(percent) && percent >= PROMO_PERCENT.min && percent <= PROMO_PERCENT.max;
+  const draft = { type: form.type, bundle: form.bundle, percent };
+  const dirty = form.type !== promo.type || (form.type === "bundle" && form.bundle !== promo.bundle) || (form.type === "percent" && percent !== promo.percent);
+  const invalid = form.type === "percent" && !percentValid;
+
+  async function submit(event) {
+    event.preventDefault();
+    setState({ type: "working" });
+    try {
+      const { promo: saved } = await saveSettings({ promo: draft });
+      setForm({ ...saved, percent: String(saved.percent) });
+      setState({ type: "ok", text: saved.type === "none" ? "Guardado. La tienda está sin promo." : `Guardado. La promo ${promoLabel(saved)} ya está en la tienda.` });
+      router.refresh();
+    } catch (error) {
+      setState({ type: "error", text: error.message });
+    }
+  }
+
+  // Ejemplo con precios de muestra, calculado igual que en el carrito
+  let example = null;
+  if (form.type === "bundle") {
+    const take = PROMO_BUNDLES.find((item) => item.id === form.bundle)?.take || 2;
+    const items = SAMPLE_PRICES.slice(0, take).map((price) => ({ price, quantity: 1 }));
+    const totals = applyPromo(items, draft);
+    example = `Si llevan ${take} productos de ${items.map((item) => formatPrice(item.price)).join(", ")}, pagan ${formatPrice(totals.total)} en vez de ${formatPrice(totals.subtotal)}.`;
+  } else if (form.type === "percent" && percentValid) {
+    const totals = applyPromo([{ price: SAMPLE_PRICES[0], quantity: 1 }], draft);
+    example = `Un producto de ${formatPrice(totals.subtotal)} queda en ${formatPrice(totals.total)}.`;
+  }
+
+  const chip = (selected) =>
+    cn(
+      "rounded-full border-2 px-3.5 py-1.5 text-[14px] font-semibold tabular-nums transition-colors",
+      selected ? "border-tinta bg-tinta text-crema" : "border-linea bg-white hover:border-teal"
+    );
+
+  return (
+    <form onSubmit={submit} className="rounded-[24px] bg-white p-4 sm:p-6">
+      <h2 className="text-[18px] font-semibold">Promoción en toda la tienda</h2>
+      <p className="mt-0.5 text-[14px] text-gris">Se aplica a todos los productos: se ve en los precios, en el carrito y en el pedido por WhatsApp.</p>
+
+      <div className="mt-4 grid grid-cols-3 rounded-full border-2 border-linea bg-crema p-1" role="radiogroup" aria-label="Tipo de promoción">
+        {PROMO_TYPES.map((type) => (
+          <button
+            key={type.id}
+            type="button"
+            role="radio"
+            aria-checked={form.type === type.id}
+            onClick={() => setForm((current) => ({ ...current, type: type.id }))}
+            className={cn(
+              "rounded-full px-2 py-2 text-[13px] font-medium leading-tight transition-colors sm:text-[14px]",
+              form.type === type.id ? "bg-white text-tinta shadow-sm" : "text-gris hover:text-tinta"
+            )}
+          >
+            {type.label}
+          </button>
+        ))}
+      </div>
+
+      {form.type === "bundle" ? (
+        <fieldset className="mt-4">
+          <legend className="text-[14px] font-medium">¿Cuál?</legend>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {PROMO_BUNDLES.map((bundle) => (
+              <button
+                key={bundle.id}
+                type="button"
+                aria-pressed={form.bundle === bundle.id}
+                onClick={() => setForm((current) => ({ ...current, bundle: bundle.id }))}
+                className={chip(form.bundle === bundle.id)}
+              >
+                {bundle.id}
+              </button>
+            ))}
+          </div>
+        </fieldset>
+      ) : null}
+
+      {form.type === "percent" ? (
+        <div className="mt-4">
+          <label className="block text-[14px] font-medium" htmlFor="promo-percent">
+            Descuento
+          </label>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <div className="relative">
+              <input
+                id="promo-percent"
+                type="number"
+                inputMode="numeric"
+                min={PROMO_PERCENT.min}
+                max={PROMO_PERCENT.max}
+                step={1}
+                value={form.percent}
+                onChange={(event) => setForm((current) => ({ ...current, percent: event.target.value }))}
+                className="h-11 w-[96px] rounded-xl border-2 border-linea bg-white pl-3.5 pr-8 text-[16px] font-semibold tabular-nums outline-none focus:border-teal-deep"
+              />
+              <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 font-semibold text-gris">%</span>
+            </div>
+            {QUICK_PERCENTS.map((value) => (
+              <button key={value} type="button" onClick={() => setForm((current) => ({ ...current, percent: String(value) }))} className={chip(percent === value)}>
+                {value}%
+              </button>
+            ))}
+          </div>
+          {!percentValid ? (
+            <p className="mt-2 text-[13px] text-pink-ink">
+              Poné un número entero entre {PROMO_PERCENT.min} y {PROMO_PERCENT.max}.
+            </p>
+          ) : null}
+        </div>
+      ) : null}
+
+      <div className="mt-5 rounded-2xl border-2 border-linea bg-papel px-4 py-3.5 text-[14px] leading-relaxed">
+        {form.type === "none" ? (
+          <p className="text-gris">Sin promoción: los productos se venden a su precio normal.</p>
+        ) : (
+          <>
+            <p>
+              <span className="mr-1.5 rounded-full bg-tinta px-2 py-0.5 text-[12px] font-bold text-crema">{promoLabel(draft) || "…"}</span>
+              {percentValid || form.type === "bundle" ? promoDescription(draft) : null}
+            </p>
+            {example ? <p className="mt-1.5 text-gris">{example}</p> : null}
+          </>
+        )}
+      </div>
+      {form.type !== "none" ? <p className="mt-2 text-[13px] text-gris">Tip: avisalo también en la barra de anuncio.</p> : null}
+
+      <div className="mt-5 flex flex-wrap items-center gap-2">
+        <button type="submit" disabled={!dirty || invalid || state?.type === "working"} className="btn-primary">
+          {state?.type === "working" ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
+          {form.type === "none" && promo.type !== "none" ? "Quitar promo" : "Guardar promo"}
+        </button>
+      </div>
+      <Status state={state} />
+    </form>
+  );
+}
 
 // Barra de anuncio arriba del header: prender/apagar, frase y color.
 function AnnouncementSettings({ announcement, limit }) {

@@ -1,10 +1,12 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { applyPromo, NO_PROMO } from "@/lib/promo";
 
 // Carrito guardado en el navegador (localStorage).
 // Cada ítem guarda una "foto" del producto (nombre, precio, portada) para
 // poder mostrarse sin volver a consultar la base.
+// La promo de la tienda (2x1, % OFF) llega del servidor y se aplica al calcular el total.
 
 const STORAGE_KEY = "adapto-cart-v1";
 const MAX_QUANTITY = 99;
@@ -40,7 +42,7 @@ export function toCartItem(product, subcategoryName) {
   };
 }
 
-export function CartProvider({ children }) {
+export function CartProvider({ children, promo = NO_PROMO }) {
   const [items, setItems] = useState([]);
   const [ready, setReady] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -97,11 +99,14 @@ export function CartProvider({ children }) {
 
   const value = useMemo(() => {
     const count = items.reduce((sum, item) => sum + item.quantity, 0);
-    const total = items.reduce((sum, item) => sum + item.quantity * item.price, 0);
+    const { subtotal, discount, total } = applyPromo(items, promo);
     return {
       items,
       count,
+      subtotal,
+      discount,
       total,
+      promo,
       ready,
       isOpen,
       open: () => setIsOpen(true),
@@ -115,7 +120,7 @@ export function CartProvider({ children }) {
       bump,
       maxQuantity: MAX_QUANTITY
     };
-  }, [items, ready, isOpen, addItem, setQuantity, removeItem, clear, toast, bump]);
+  }, [items, ready, isOpen, addItem, setQuantity, removeItem, clear, toast, bump, promo]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 const sections = [
   { href: "/admin", label: "Productos", match: (path) => path === "/admin" || path.startsWith("/admin/productos") },
-  { href: "/admin/sitio", label: "Inicio y Nosotras", match: (path) => path.startsWith("/admin/sitio") }
+  { href: "/admin/sitio", label: "Página y promos", match: (path) => path.startsWith("/admin/sitio") }
 ];
 
 export function AdminNav() {

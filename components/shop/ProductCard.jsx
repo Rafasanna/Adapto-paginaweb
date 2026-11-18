@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { PagePreview } from "./PagePreview";
-import { Price } from "./Price";
+import { ProductPrice, PromoBadge } from "./ProductPrice";
 import { toCartItem, useCart } from "./CartProvider";
 
 // Tarjeta de producto: la hoja (con carrusel) sobre un fondo crema neutro.
@@ -22,6 +22,7 @@ export function ProductCard({ product, subcategory, index = 0, priority = false 
           {product.featured ? (
             <span className="absolute left-3 top-3 rounded-full bg-teal-dark px-2.5 py-0.5 text-[12px] font-semibold text-tinta">Destacado</span>
           ) : null}
+          <PromoBadge className="absolute right-3 top-3 rounded-full bg-tinta px-2.5 py-0.5 text-[13px] font-bold text-crema" />
         </div>
 
         <button
@@ -43,7 +44,7 @@ export function ProductCard({ product, subcategory, index = 0, priority = false 
             {product.name}
           </Link>
         </h3>
-        <Price price={product.price} compareAtPrice={product.compareAtPrice} className="mt-1.5" />
+        <ProductPrice product={product} className="mt-1.5" />
       </div>
     </article>
   );

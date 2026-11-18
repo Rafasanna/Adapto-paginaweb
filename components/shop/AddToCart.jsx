@@ -3,16 +3,18 @@
 import { useState } from "react";
 import { ShoppingBag } from "lucide-react";
 import { formatPrice } from "@/lib/format";
+import { applyPromo } from "@/lib/promo";
 import { buildOrderMessage, whatsappUrl } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/site/icons";
 import { QuantityStepper } from "./QuantityStepper";
 import { toCartItem, useCart } from "./CartProvider";
 
 export function AddToCart({ product, subcategoryName }) {
-  const { addItem, maxQuantity } = useCart();
+  const { addItem, maxQuantity, promo } = useCart();
   const [quantity, setQuantity] = useState(1);
   const item = toCartItem(product, subcategoryName);
-  const directMessage = buildOrderMessage([{ ...item, quantity }]);
+  const directMessage = buildOrderMessage([{ ...item, quantity }], { promo });
+  const totals = applyPromo([{ price: product.price, quantity }], promo);
 
   return (
     <div>
@@ -32,7 +34,9 @@ export function AddToCart({ product, subcategoryName }) {
       </div>
       {quantity > 1 ? (
         <p className="mt-2 text-[14px] text-gris">
-          {quantity} unidades · <span className="font-semibold text-tinta tabular-nums">{formatPrice(product.price * quantity)}</span>
+          {quantity} unidades ·{" "}
+          {totals.discount > 0 ? <span className="tabular-nums line-through">{formatPrice(totals.subtotal)}</span> : null}{" "}
+          <span className="font-semibold text-tinta tabular-nums">{formatPrice(totals.total)}</span>
         </p>
       ) : null}
       <a

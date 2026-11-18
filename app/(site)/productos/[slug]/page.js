@@ -8,7 +8,7 @@ import { pluralize } from "@/lib/format";
 import { buildProductQuestion, whatsappUrl } from "@/lib/whatsapp";
 import { ProductGallery } from "@/components/shop/ProductGallery";
 import { AddToCart } from "@/components/shop/AddToCart";
-import { Price } from "@/components/shop/Price";
+import { ProductPrice, PromoNote } from "@/components/shop/ProductPrice";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { TopicIcon } from "@/components/site/TopicIcon";
 
@@ -84,7 +84,8 @@ export default async function ProductPage({ params }) {
           <h1 className="title mt-4 text-[32px] sm:text-[40px]">{product.name}</h1>
           {product.shortDescription ? <p className="mt-3 text-[17px] leading-relaxed text-tinta/80">{product.shortDescription}</p> : null}
 
-          <Price price={product.price} compareAtPrice={product.compareAtPrice} size="lg" className="mt-5" />
+          <ProductPrice product={product} size="lg" className="mt-5" />
+          <PromoNote className="mt-2 text-[14px] leading-relaxed text-tinta/80" />
 
           <dl className="mt-4 flex flex-wrap gap-2 text-[14px]">
             <div className="flex items-center gap-1.5 rounded-full bg-crema px-3 py-1.5">
