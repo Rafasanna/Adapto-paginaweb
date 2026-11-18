@@ -4,10 +4,12 @@ import { CartProvider } from "@/components/shop/CartProvider";
 import { CartDrawer } from "@/components/shop/CartDrawer";
 import { CartToast } from "@/components/shop/CartToast";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
+import { AnnouncementBar } from "@/components/site/AnnouncementBar";
 import { getCatalog } from "@/lib/server/catalog";
+import { getSiteContent } from "@/lib/server/settings";
 
 export default async function SiteLayout({ children }) {
-  const { isDemo } = await getCatalog();
+  const [{ isDemo }, content] = await Promise.all([getCatalog(), getSiteContent()]);
 
   return (
     <CartProvider>
@@ -22,6 +24,7 @@ export default async function SiteLayout({ children }) {
           Vista previa: los productos que ves son de ejemplo hasta conectar la base de datos.
         </p>
       ) : null}
+      <AnnouncementBar announcement={content.announcement} />
       <Header />
       <main id="contenido">{children}</main>
       <Footer />

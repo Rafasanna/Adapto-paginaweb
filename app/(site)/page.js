@@ -5,6 +5,7 @@ import { site } from "@/config/site";
 import { getCatalog } from "@/lib/server/catalog";
 import { getSiteContent } from "@/lib/server/settings";
 import { colorClass } from "@/lib/colors";
+import { veilClass } from "@/lib/banner";
 import { pluralize } from "@/lib/format";
 import { whatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
@@ -77,8 +78,14 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Bienvenida: logo y, debajo, la descripción */}
+      {/* Bienvenida: logo y, debajo, la descripción. La foto de fondo y el velo se eligen en el admin. */}
       <section className="relative overflow-hidden bg-white">
+        {content.hero.image ? (
+          <>
+            <Image src={content.hero.image} alt="" fill priority sizes="100vw" className="object-cover" />
+            <div className={cn("absolute inset-0", veilClass(content.hero.veil))} aria-hidden="true" />
+          </>
+        ) : null}
         <div className="container-site relative flex flex-col items-center pb-16 pt-14 text-center sm:pb-20 sm:pt-16">
           <h1 className="w-full max-w-[560px] animate-fade-in-up">
             <Logo priority className="h-auto w-full" alt="ADAPTO · Recursos digitales" />

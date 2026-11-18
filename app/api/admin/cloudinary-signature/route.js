@@ -2,7 +2,7 @@ import { getAdminSession } from "@/lib/server/auth";
 import { createUploadSignature } from "@/lib/server/cloudinary";
 import { errorResponse, json, PublicApiError, readJsonBody, validateMutationOrigin } from "@/lib/server/http";
 
-// Devuelve una firma de Cloudinary para que el admin suba imágenes (páginas de vista previa o fotos de Nosotras)
+// Devuelve una firma de Cloudinary para que el admin suba imágenes (vistas previas, fotos de Nosotras o fondo del inicio)
 // directo desde el navegador, sin exponer el API secret. Body: { "scope": "products" }
 export async function POST(request) {
   try {
